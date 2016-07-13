@@ -7,20 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183FDE411D35DE1C0079264B /* MYZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE401D35DE1C0079264B /* MYZTabBarController.m */; };
+		183FDE441D35DE3D0079264B /* MYZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE431D35DE3D0079264B /* MYZNavigationController.m */; };
+		183FDE471D35E6E20079264B /* MYZHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE461D35E6E20079264B /* MYZHomeController.m */; };
+		183FDE4A1D35E6F40079264B /* MYZMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE491D35E6F40079264B /* MYZMineController.m */; };
+		183FDE4D1D3613250079264B /* MYZNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE4C1D3613250079264B /* MYZNextViewController.m */; };
+		183FDE501D363EDD0079264B /* MYZHomeTopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FDE4F1D363EDD0079264B /* MYZHomeTopTableViewCell.m */; };
 		18D50A8B1D265D9C001AB2FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8A1D265D9C001AB2FB /* main.m */; };
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
-		18D50A911D265D9C001AB2FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A901D265D9C001AB2FB /* ViewController.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
 		18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A971D265D9C001AB2FB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183FDE3F1D35DE1C0079264B /* MYZTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZTabBarController.h; sourceTree = "<group>"; };
+		183FDE401D35DE1C0079264B /* MYZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZTabBarController.m; sourceTree = "<group>"; };
+		183FDE421D35DE3D0079264B /* MYZNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZNavigationController.h; sourceTree = "<group>"; };
+		183FDE431D35DE3D0079264B /* MYZNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZNavigationController.m; sourceTree = "<group>"; };
+		183FDE451D35E6E20079264B /* MYZHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZHomeController.h; sourceTree = "<group>"; };
+		183FDE461D35E6E20079264B /* MYZHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZHomeController.m; sourceTree = "<group>"; };
+		183FDE481D35E6F40079264B /* MYZMineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineController.h; sourceTree = "<group>"; };
+		183FDE491D35E6F40079264B /* MYZMineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineController.m; sourceTree = "<group>"; };
+		183FDE4B1D3613250079264B /* MYZNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZNextViewController.h; sourceTree = "<group>"; };
+		183FDE4C1D3613250079264B /* MYZNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZNextViewController.m; sourceTree = "<group>"; };
+		183FDE4E1D363EDD0079264B /* MYZHomeTopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZHomeTopTableViewCell.h; sourceTree = "<group>"; };
+		183FDE4F1D363EDD0079264B /* MYZHomeTopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZHomeTopTableViewCell.m; sourceTree = "<group>"; };
 		18D50A861D265D9C001AB2FB /* PasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D50A8A1D265D9C001AB2FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D50A8C1D265D9C001AB2FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18D50A8D1D265D9C001AB2FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		18D50A8F1D265D9C001AB2FB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		18D50A901D265D9C001AB2FB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		18D50A951D265D9C001AB2FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D50A981D265D9C001AB2FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18D50A9A1D265D9C001AB2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,8 +73,18 @@
 			children = (
 				18D50A8C1D265D9C001AB2FB /* AppDelegate.h */,
 				18D50A8D1D265D9C001AB2FB /* AppDelegate.m */,
-				18D50A8F1D265D9C001AB2FB /* ViewController.h */,
-				18D50A901D265D9C001AB2FB /* ViewController.m */,
+				183FDE3F1D35DE1C0079264B /* MYZTabBarController.h */,
+				183FDE401D35DE1C0079264B /* MYZTabBarController.m */,
+				183FDE421D35DE3D0079264B /* MYZNavigationController.h */,
+				183FDE431D35DE3D0079264B /* MYZNavigationController.m */,
+				183FDE451D35E6E20079264B /* MYZHomeController.h */,
+				183FDE461D35E6E20079264B /* MYZHomeController.m */,
+				183FDE4E1D363EDD0079264B /* MYZHomeTopTableViewCell.h */,
+				183FDE4F1D363EDD0079264B /* MYZHomeTopTableViewCell.m */,
+				183FDE481D35E6F40079264B /* MYZMineController.h */,
+				183FDE491D35E6F40079264B /* MYZMineController.m */,
+				183FDE4B1D3613250079264B /* MYZNextViewController.h */,
+				183FDE4C1D3613250079264B /* MYZNextViewController.m */,
 				18D50A891D265D9C001AB2FB /* Supporting Files */,
 			);
 			path = PasscodeLockDemo;
@@ -102,6 +127,7 @@
 		18D50A7E1D265D9C001AB2FB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MYZ;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = myz;
 				TargetAttributes = {
@@ -145,9 +171,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D50A911D265D9C001AB2FB /* ViewController.m in Sources */,
+				183FDE4D1D3613250079264B /* MYZNextViewController.m in Sources */,
+				183FDE411D35DE1C0079264B /* MYZTabBarController.m in Sources */,
 				18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */,
+				183FDE501D363EDD0079264B /* MYZHomeTopTableViewCell.m in Sources */,
 				18D50A8B1D265D9C001AB2FB /* main.m in Sources */,
+				183FDE4A1D35E6F40079264B /* MYZMineController.m in Sources */,
+				183FDE471D35E6E20079264B /* MYZHomeController.m in Sources */,
+				183FDE441D35DE3D0079264B /* MYZNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +319,7 @@
 				18D50A9F1D265D9C001AB2FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
