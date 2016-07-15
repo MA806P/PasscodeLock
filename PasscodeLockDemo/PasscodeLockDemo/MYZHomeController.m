@@ -15,6 +15,8 @@ static CGFloat alpha = 0;
 
 @interface MYZHomeController ()
 
+@property (nonatomic, assign) BOOL isChangeStatusBar;
+
 @end
 
 @implementation MYZHomeController
@@ -24,9 +26,11 @@ static CGFloat alpha = 0;
 {
     [super viewWillAppear:animated];
     
-    [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:alpha];
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    [self scrollViewDidScroll:self.tableView];
     
 }
 
@@ -36,8 +40,9 @@ static CGFloat alpha = 0;
     
     //设置当有导航栏自动添加64的高度的属性为NO
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 46, 0);
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellId];
+    
     
     //设置tableView的头部视图
     UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0, 250)];
@@ -76,14 +81,14 @@ static CGFloat alpha = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@" %ld -- %ld ", indexPath.section, indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@" %d -- %d ", indexPath.section, indexPath.row];
     return cell;
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"section-%ld", section];
+    return [NSString stringWithFormat:@"section-%d", section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,19 +100,51 @@ static CGFloat alpha = 0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    alpha =  scrollView.contentOffset.y/64;
+    alpha =  scrollView.contentOffset.y/200.0;
     
     alpha = (alpha <= 0)?0:alpha;
     alpha = (alpha >= 1)?1:alpha;
     
+    
+    //NSLog(@" --- %.2f", alpha);
+    
+    UIColor * titleColor;
+    
+    if (alpha > 0.6)
+    {
+        self.isChangeStatusBar = YES;
+        titleColor = [UIColor blackColor];
+    }
+    else
+    {
+        self.isChangeStatusBar = NO;
+        titleColor = [UIColor whiteColor];
+    }
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)])
+    {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+
+    
     //设置导航条上的标签是否跟着透明
-    self.navigationItem.leftBarButtonItem.customView.alpha = alpha;
-    self.navigationItem.titleView.alpha = alpha;
-    self.navigationItem.rightBarButtonItem.customView.alpha = alpha;
+    //self.navigationItem.leftBarButtonItem.customView.alpha = alpha;
+    //self.navigationItem.rightBarButtonItem.customView.alpha = alpha;
+    //self.navigationItem.titleView.alpha = alpha;
     
-    [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:alpha];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[titleColor colorWithAlphaComponent:alpha]};
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
     
     
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    if (self.isChangeStatusBar)
+    {
+        return UIStatusBarStyleDefault;
+    }
+    return UIStatusBarStyleLightContent;
 }
 
 
