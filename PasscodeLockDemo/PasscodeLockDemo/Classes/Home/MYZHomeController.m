@@ -10,7 +10,6 @@
 #import "MYZNextViewController.h"
 
 static NSString * const CellId = @"CellId";
-
 static CGFloat alpha = 0;
 
 @interface MYZHomeController ()
@@ -70,7 +69,7 @@ static CGFloat alpha = 0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,14 +80,14 @@ static CGFloat alpha = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@" %d -- %d ", indexPath.section, indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@" %d -- %d ", (int)indexPath.section, (int)indexPath.row];
     return cell;
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"section-%d", section];
+    return [NSString stringWithFormat:@"section-%d", (int)section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
