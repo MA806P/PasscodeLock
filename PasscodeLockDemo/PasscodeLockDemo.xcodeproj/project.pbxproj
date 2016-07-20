@@ -10,8 +10,15 @@
 		18810F231D3F61A7003058BA /* MYZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F171D3F61A7003058BA /* MYZNavigationController.m */; };
 		18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F191D3F61A7003058BA /* MYZTabBarController.m */; };
 		18810F251D3F61A7003058BA /* MYZHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F1C1D3F61A7003058BA /* MYZHomeController.m */; };
-		18810F261D3F61A7003058BA /* MYZMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F1F1D3F61A7003058BA /* MYZMineController.m */; };
 		18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F221D3F61A7003058BA /* MYZNextViewController.m */; };
+		18810F2D1D3F68BC003058BA /* MYZMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F2A1D3F68BC003058BA /* MYZMineController.m */; };
+		18810F341D3F6916003058BA /* MYZSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F331D3F6916003058BA /* MYZSettingGroup.m */; };
+		18810F371D3F6A5E003058BA /* MYZSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F361D3F6A5E003058BA /* MYZSettingItem.m */; };
+		18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F391D3F6B56003058BA /* MYZSettingPushItem.m */; };
+		18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F3C1D3F6BA0003058BA /* MYZSettingSwitchItem.m */; };
+		18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F3F1D3F6BCB003058BA /* MYZSettingCheckItem.m */; };
+		18810F431D3F71ED003058BA /* MYZMineBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F421D3F71ED003058BA /* MYZMineBaseController.m */; };
+		18810F461D3F73AA003058BA /* MYZSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F451D3F73AA003058BA /* MYZSettingCell.m */; };
 		18D50A8B1D265D9C001AB2FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8A1D265D9C001AB2FB /* main.m */; };
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
@@ -25,10 +32,24 @@
 		18810F191D3F61A7003058BA /* MYZTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZTabBarController.m; sourceTree = "<group>"; };
 		18810F1B1D3F61A7003058BA /* MYZHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZHomeController.h; sourceTree = "<group>"; };
 		18810F1C1D3F61A7003058BA /* MYZHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZHomeController.m; sourceTree = "<group>"; };
-		18810F1E1D3F61A7003058BA /* MYZMineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineController.h; sourceTree = "<group>"; };
-		18810F1F1D3F61A7003058BA /* MYZMineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineController.m; sourceTree = "<group>"; };
 		18810F211D3F61A7003058BA /* MYZNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZNextViewController.h; sourceTree = "<group>"; };
 		18810F221D3F61A7003058BA /* MYZNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZNextViewController.m; sourceTree = "<group>"; };
+		18810F291D3F68BC003058BA /* MYZMineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineController.h; sourceTree = "<group>"; };
+		18810F2A1D3F68BC003058BA /* MYZMineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineController.m; sourceTree = "<group>"; };
+		18810F321D3F6916003058BA /* MYZSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingGroup.h; sourceTree = "<group>"; };
+		18810F331D3F6916003058BA /* MYZSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingGroup.m; sourceTree = "<group>"; };
+		18810F351D3F6A5E003058BA /* MYZSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingItem.h; sourceTree = "<group>"; };
+		18810F361D3F6A5E003058BA /* MYZSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingItem.m; sourceTree = "<group>"; };
+		18810F381D3F6B56003058BA /* MYZSettingPushItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingPushItem.h; sourceTree = "<group>"; };
+		18810F391D3F6B56003058BA /* MYZSettingPushItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingPushItem.m; sourceTree = "<group>"; };
+		18810F3B1D3F6BA0003058BA /* MYZSettingSwitchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingSwitchItem.h; sourceTree = "<group>"; };
+		18810F3C1D3F6BA0003058BA /* MYZSettingSwitchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingSwitchItem.m; sourceTree = "<group>"; };
+		18810F3E1D3F6BCB003058BA /* MYZSettingCheckItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingCheckItem.h; sourceTree = "<group>"; };
+		18810F3F1D3F6BCB003058BA /* MYZSettingCheckItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingCheckItem.m; sourceTree = "<group>"; };
+		18810F411D3F71ED003058BA /* MYZMineBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineBaseController.h; sourceTree = "<group>"; };
+		18810F421D3F71ED003058BA /* MYZMineBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineBaseController.m; sourceTree = "<group>"; };
+		18810F441D3F73AA003058BA /* MYZSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingCell.h; sourceTree = "<group>"; };
+		18810F451D3F73AA003058BA /* MYZSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingCell.m; sourceTree = "<group>"; };
 		18D50A861D265D9C001AB2FB /* PasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D50A8A1D265D9C001AB2FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D50A8C1D265D9C001AB2FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,6 +73,7 @@
 		18810F141D3F61A7003058BA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				18810F2E1D3F68C4003058BA /* Passcode */,
 				18810F151D3F61A7003058BA /* Foundation */,
 				18810F1A1D3F61A7003058BA /* Home */,
 				18810F1D1D3F61A7003058BA /* Mine */,
@@ -83,8 +105,9 @@
 		18810F1D1D3F61A7003058BA /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				18810F1E1D3F61A7003058BA /* MYZMineController.h */,
-				18810F1F1D3F61A7003058BA /* MYZMineController.m */,
+				18810F281D3F68BC003058BA /* Controller */,
+				18810F2B1D3F68BC003058BA /* Model */,
+				18810F2C1D3F68BC003058BA /* View */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -96,6 +119,74 @@
 				18810F221D3F61A7003058BA /* MYZNextViewController.m */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		18810F281D3F68BC003058BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18810F411D3F71ED003058BA /* MYZMineBaseController.h */,
+				18810F421D3F71ED003058BA /* MYZMineBaseController.m */,
+				18810F291D3F68BC003058BA /* MYZMineController.h */,
+				18810F2A1D3F68BC003058BA /* MYZMineController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18810F2B1D3F68BC003058BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18810F321D3F6916003058BA /* MYZSettingGroup.h */,
+				18810F331D3F6916003058BA /* MYZSettingGroup.m */,
+				18810F351D3F6A5E003058BA /* MYZSettingItem.h */,
+				18810F361D3F6A5E003058BA /* MYZSettingItem.m */,
+				18810F381D3F6B56003058BA /* MYZSettingPushItem.h */,
+				18810F391D3F6B56003058BA /* MYZSettingPushItem.m */,
+				18810F3B1D3F6BA0003058BA /* MYZSettingSwitchItem.h */,
+				18810F3C1D3F6BA0003058BA /* MYZSettingSwitchItem.m */,
+				18810F3E1D3F6BCB003058BA /* MYZSettingCheckItem.h */,
+				18810F3F1D3F6BCB003058BA /* MYZSettingCheckItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18810F2C1D3F68BC003058BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18810F441D3F73AA003058BA /* MYZSettingCell.h */,
+				18810F451D3F73AA003058BA /* MYZSettingCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18810F2E1D3F68C4003058BA /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				18810F2F1D3F68C4003058BA /* Controller */,
+				18810F301D3F68C4003058BA /* Model */,
+				18810F311D3F68C4003058BA /* View */,
+			);
+			path = Passcode;
+			sourceTree = "<group>";
+		};
+		18810F2F1D3F68C4003058BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18810F301D3F68C4003058BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18810F311D3F68C4003058BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		18D50A7D1D265D9C001AB2FB = {
@@ -206,13 +297,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */,
+				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
+				18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */,
 				18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */,
 				18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */,
+				18810F2D1D3F68BC003058BA /* MYZMineController.m in Sources */,
 				18D50A8B1D265D9C001AB2FB /* main.m in Sources */,
-				18810F261D3F61A7003058BA /* MYZMineController.m in Sources */,
 				18810F251D3F61A7003058BA /* MYZHomeController.m in Sources */,
+				18810F461D3F73AA003058BA /* MYZSettingCell.m in Sources */,
+				18810F431D3F71ED003058BA /* MYZMineBaseController.m in Sources */,
+				18810F371D3F6A5E003058BA /* MYZSettingItem.m in Sources */,
 				18810F231D3F61A7003058BA /* MYZNavigationController.m in Sources */,
+				18810F341D3F6916003058BA /* MYZSettingGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

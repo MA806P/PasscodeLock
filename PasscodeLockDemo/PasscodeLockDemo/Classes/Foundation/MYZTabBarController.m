@@ -22,14 +22,11 @@
     [super viewDidLoad];
     
     MYZHomeController * homeVc = [[MYZHomeController alloc] init];
-    homeVc.view.backgroundColor = [UIColor lightGrayColor];
     [self addChildController:homeVc title:@"首页" imageName:@"tab_1"];
     
     MYZMineController * mineVc = [[MYZMineController alloc] init];
-    mineVc.view.backgroundColor = [UIColor cyanColor];
     [self addChildController:mineVc title:@"我的" imageName:@"tab_2"];
-    
-    //self.selectedIndex = 1;
+    self.selectedIndex = 1;
 }
 
 //添加子控制器

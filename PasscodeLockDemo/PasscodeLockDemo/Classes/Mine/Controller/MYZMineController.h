@@ -6,8 +6,9 @@
 //  Copyright © 2016年 myz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
-@interface MYZMineController : UIViewController
+#import "MYZMineBaseController.h"
+
+@interface MYZMineController : MYZMineBaseController
 
 @end
