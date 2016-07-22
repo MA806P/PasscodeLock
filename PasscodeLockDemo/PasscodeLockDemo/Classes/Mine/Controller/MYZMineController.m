@@ -7,8 +7,7 @@
 //
 
 #import "MYZMineController.h"
-#import "MYZSettingGroup.h"
-#import "MYZSettingPushItem.h"
+#import "MYZMineLockTypeController.h"
 
 @interface MYZMineController ()
 
@@ -18,8 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
-    
     
     UIView * headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 120)];
     headView.backgroundColor = [UIColor clearColor];
@@ -41,11 +38,9 @@
     
     
     //MYZSettingPushItem * item = [MYZSettingPushItem settingItemWithIconName:@"lock_icon" andLabelText:@"安全设置"];
-    MYZSettingPushItem * item = [MYZSettingPushItem settingPushItemWithIconName:@"lock_icon" andLabelText:@"安全设置" andNextClass:[UIViewController class]];
+    MYZSettingPushItem * item = [MYZSettingPushItem settingPushItemWithIconName:@"lock_icon" andLabelText:@"安全设置" andNextClass:[MYZMineLockTypeController class]];
     
     MYZSettingGroup * group = [[MYZSettingGroup alloc] init];
-    //group.headerTitle = @"header title test";
-    //group.footerTitle = @"footer title test";
     group.items = @[item];
     
     self.dataSources = @[group];
@@ -57,10 +52,16 @@
 - (void)tableViewHeadViewTap
 {
     UIViewController * vc = [[UIViewController alloc] init];
-    vc.view.backgroundColor = [UIColor lightGrayColor];
-    NSData * gifData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"" ofType:@"gif"]];
-    UIWebView * webView = [[UIWebView alloc] initWithFrame:vc.view.bounds];
+    vc.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
+    vc.automaticallyAdjustsScrollViewInsets = NO;
+    NSData * gifData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"00" ofType:@"gif"]];
+    CGFloat gifWH = 200;
+    CGFloat gifY = ([UIScreen mainScreen].bounds.size.height-64-gifWH)*0.5;
+    CGFloat gifX = ([UIScreen mainScreen].bounds.size.width-gifWH)*0.5;
+    UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(gifX, gifY, gifWH, gifWH)];
     [webView loadData:gifData MIMEType:@"image/gif" textEncodingName:@"" baseURL:[NSURL new]];
+    webView.scrollView.bounces = NO;
+    webView.scalesPageToFit = YES;
     [vc.view addSubview:webView];
     
     [self.navigationController pushViewController:vc animated:YES];

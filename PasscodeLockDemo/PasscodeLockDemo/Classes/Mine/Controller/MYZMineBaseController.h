@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MYZSettingGroup.h"
+#import "MYZSettingItem.h"
+#import "MYZSettingPushItem.h"
+#import "MYZSettingCheckItem.h"
+#import "MYZSettingSwitchItem.h"
 
 @interface MYZMineBaseController : UITableViewController
 

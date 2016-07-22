@@ -10,4 +10,6 @@
 
 @interface MYZSettingSwitchItem : MYZSettingItem
 
+@property (nonatomic, getter=isSwitchOn) BOOL switchOn;
+
 @end

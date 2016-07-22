@@ -7,11 +7,6 @@
 //
 
 #import "MYZMineBaseController.h"
-#import "MYZSettingGroup.h"
-#import "MYZSettingItem.h"
-#import "MYZSettingPushItem.h"
-#import "MYZSettingCheckItem.h"
-#import "MYZSettingSwitchItem.h"
 
 #import "MYZSettingCell.h"
 
@@ -36,8 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
     [self.tableView registerClass:[MYZSettingCell class] forCellReuseIdentifier:SettingCellId];
     
 }

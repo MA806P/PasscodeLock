@@ -19,6 +19,10 @@
 		18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F3F1D3F6BCB003058BA /* MYZSettingCheckItem.m */; };
 		18810F431D3F71ED003058BA /* MYZMineBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F421D3F71ED003058BA /* MYZMineBaseController.m */; };
 		18810F461D3F73AA003058BA /* MYZSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18810F451D3F73AA003058BA /* MYZSettingCell.m */; };
+		189B96981D40ACFD00219B25 /* 00.gif in Resources */ = {isa = PBXBuildFile; fileRef = 189B96971D40ACFD00219B25 /* 00.gif */; };
+		189B969B1D40B0FC00219B25 /* MYZMineLockTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B969A1D40B0FC00219B25 /* MYZMineLockTypeController.m */; };
+		189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B969D1D40B3B400219B25 /* MYZMineGestureController.m */; };
+		189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */; };
 		18D50A8B1D265D9C001AB2FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8A1D265D9C001AB2FB /* main.m */; };
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
@@ -50,6 +54,13 @@
 		18810F421D3F71ED003058BA /* MYZMineBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineBaseController.m; sourceTree = "<group>"; };
 		18810F441D3F73AA003058BA /* MYZSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZSettingCell.h; sourceTree = "<group>"; };
 		18810F451D3F73AA003058BA /* MYZSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZSettingCell.m; sourceTree = "<group>"; };
+		189B96971D40ACFD00219B25 /* 00.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 00.gif; sourceTree = "<group>"; };
+		189B96991D40B0FC00219B25 /* MYZMineLockTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineLockTypeController.h; sourceTree = "<group>"; };
+		189B969A1D40B0FC00219B25 /* MYZMineLockTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineLockTypeController.m; sourceTree = "<group>"; };
+		189B969C1D40B3B400219B25 /* MYZMineGestureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineGestureController.h; sourceTree = "<group>"; };
+		189B969D1D40B3B400219B25 /* MYZMineGestureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineGestureController.m; sourceTree = "<group>"; };
+		189B969F1D40B3C800219B25 /* MYZMinePasscodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMinePasscodeController.h; sourceTree = "<group>"; };
+		189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMinePasscodeController.m; sourceTree = "<group>"; };
 		18D50A861D265D9C001AB2FB /* PasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D50A8A1D265D9C001AB2FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D50A8C1D265D9C001AB2FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -128,6 +139,12 @@
 				18810F421D3F71ED003058BA /* MYZMineBaseController.m */,
 				18810F291D3F68BC003058BA /* MYZMineController.h */,
 				18810F2A1D3F68BC003058BA /* MYZMineController.m */,
+				189B96991D40B0FC00219B25 /* MYZMineLockTypeController.h */,
+				189B969A1D40B0FC00219B25 /* MYZMineLockTypeController.m */,
+				189B969C1D40B3B400219B25 /* MYZMineGestureController.h */,
+				189B969D1D40B3B400219B25 /* MYZMineGestureController.m */,
+				189B969F1D40B3C800219B25 /* MYZMinePasscodeController.h */,
+				189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -217,6 +234,7 @@
 		18D50A891D265D9C001AB2FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				189B96971D40ACFD00219B25 /* 00.gif */,
 				18D50A8C1D265D9C001AB2FB /* AppDelegate.h */,
 				18D50A8D1D265D9C001AB2FB /* AppDelegate.m */,
 				18D50A951D265D9C001AB2FB /* Assets.xcassets */,
@@ -285,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189B96981D40ACFD00219B25 /* 00.gif in Resources */,
 				18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */,
 				18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */,
 			);
@@ -298,10 +317,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */,
+				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
 				18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */,
+				189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */,
 				18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */,
+				189B969B1D40B0FC00219B25 /* MYZMineLockTypeController.m in Sources */,
 				18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */,
 				18810F2D1D3F68BC003058BA /* MYZMineController.m in Sources */,
 				18D50A8B1D265D9C001AB2FB /* main.m in Sources */,
