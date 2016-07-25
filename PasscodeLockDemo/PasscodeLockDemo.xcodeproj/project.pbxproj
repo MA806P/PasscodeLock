@@ -27,6 +27,7 @@
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
 		18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A971D265D9C001AB2FB /* LaunchScreen.storyboard */; };
+		DA3D6EC11D46586500DA5C8E /* MYZLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3D6EC01D46586500DA5C8E /* MYZLockView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		18D50A951D265D9C001AB2FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D50A981D265D9C001AB2FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18D50A9A1D265D9C001AB2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA3D6EBF1D46586500DA5C8E /* MYZLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZLockView.h; sourceTree = "<group>"; };
+		DA3D6EC01D46586500DA5C8E /* MYZLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZLockView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +87,6 @@
 		18810F141D3F61A7003058BA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				18810F2E1D3F68C4003058BA /* Passcode */,
 				18810F151D3F61A7003058BA /* Foundation */,
 				18810F1A1D3F61A7003058BA /* Home */,
 				18810F1D1D3F61A7003058BA /* Mine */,
@@ -128,6 +130,8 @@
 			children = (
 				18810F211D3F61A7003058BA /* MYZNextViewController.h */,
 				18810F221D3F61A7003058BA /* MYZNextViewController.m */,
+				DA3D6EBF1D46586500DA5C8E /* MYZLockView.h */,
+				DA3D6EC01D46586500DA5C8E /* MYZLockView.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -175,37 +179,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		18810F2E1D3F68C4003058BA /* Passcode */ = {
-			isa = PBXGroup;
-			children = (
-				18810F2F1D3F68C4003058BA /* Controller */,
-				18810F301D3F68C4003058BA /* Model */,
-				18810F311D3F68C4003058BA /* View */,
-			);
-			path = Passcode;
-			sourceTree = "<group>";
-		};
-		18810F2F1D3F68C4003058BA /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		18810F301D3F68C4003058BA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		18810F311D3F68C4003058BA /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		18D50A7D1D265D9C001AB2FB = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +198,7 @@
 		18D50A881D265D9C001AB2FB /* PasscodeLockDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DA3D6EBC1D46542700DA5C8E /* LockView */,
 				18810F141D3F61A7003058BA /* Classes */,
 				18D50A891D265D9C001AB2FB /* Supporting Files */,
 			);
@@ -243,6 +217,29 @@
 				18D50A8A1D265D9C001AB2FB /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA3D6EBC1D46542700DA5C8E /* LockView */ = {
+			isa = PBXGroup;
+			children = (
+				DA3D6EBD1D4654E500DA5C8E /* Gesture */,
+				DA3D6EBE1D4654E500DA5C8E /* Passcode */,
+			);
+			path = LockView;
+			sourceTree = "<group>";
+		};
+		DA3D6EBD1D4654E500DA5C8E /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
+		DA3D6EBE1D4654E500DA5C8E /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Passcode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +317,7 @@
 				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
+				DA3D6EC11D46586500DA5C8E /* MYZLockView.m in Sources */,
 				18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */,
 				189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */,
 				18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */,

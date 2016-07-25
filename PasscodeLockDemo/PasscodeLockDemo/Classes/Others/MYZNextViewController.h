@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^GestureSetLock)(BOOL locked);
+
 @interface MYZNextViewController : UIViewController
+
+@property (nonatomic, copy)GestureSetLock lockBlock;
 
 @end

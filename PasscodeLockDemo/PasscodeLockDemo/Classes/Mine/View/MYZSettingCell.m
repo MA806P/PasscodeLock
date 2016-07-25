@@ -76,7 +76,7 @@
     MYZSettingSwitchItem * item = (MYZSettingSwitchItem *)self.itemData;
     item.switchOn = switchView.isOn;
     
-    [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:item.labelText];
+    
     
 }
 

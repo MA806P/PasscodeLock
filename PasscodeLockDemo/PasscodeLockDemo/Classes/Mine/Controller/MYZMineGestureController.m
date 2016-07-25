@@ -7,6 +7,7 @@
 //
 
 #import "MYZMineGestureController.h"
+#import "MYZNextViewController.h"
 
 NSString * const item1LabelText = @"手势密码";
 NSString * const item2LabelText = @"显示手势轨迹";
@@ -72,11 +73,18 @@ NSString * const item2LabelText = @"显示手势轨迹";
     //switchOn <MYZSettingSwitchItem: 0x7beb6150>  1
     
     MYZSettingSwitchItem * item = (MYZSettingSwitchItem *)object;
-    if (item.isSwitchOn)
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:item2LabelText];
-    }
-    [self resetDatasourceArray:item.isSwitchOn];
+    
+    MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
+    [self presentViewController:nvc animated:YES completion:nil];
+    
+    nvc.lockBlock = ^(BOOL locked){
+        [[NSUserDefaults standardUserDefaults] setBool:locked forKey:item.labelText];
+        if (locked) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:item2LabelText];
+        }
+        item.switchOn = locked;
+        [self resetDatasourceArray:locked];
+    };
     [self.tableView reloadData];
     
 }

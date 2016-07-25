@@ -58,7 +58,12 @@
     MYZSettingCell * cell = [MYZSettingCell settingCellWithTableView:tableView];
     
     MYZSettingGroup * group = self.dataSources[indexPath.section];
-    cell.itemData = group.items[indexPath.row];
+    MYZSettingItem * item = group.items[indexPath.row];
+    cell.itemData = item;
+    if ([item isKindOfClass:[MYZSettingSwitchItem class]])
+    {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     return cell;
 }
 
