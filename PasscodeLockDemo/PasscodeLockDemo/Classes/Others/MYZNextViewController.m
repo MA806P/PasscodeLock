@@ -22,7 +22,7 @@
     
     UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 100, 60)];
     btn.tag = 1001;
-    [btn setTitle:@"设置密码" forState:UIControlStateNormal];
+    [btn setTitle:@"设置完毕" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
@@ -36,19 +36,19 @@
 
 - (void)close:(UIButton *)btn
 {
-    __weak typeof(self) weakSelf = self;
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        if (btn.tag == 1001 && weakSelf.lockBlock) {
-            weakSelf.lockBlock(YES);
+    if (self.lockBlock)
+    {
+        if (btn.tag == 1001) {
+            self.lockBlock(!self.locked);
         }
         else
         {
-            weakSelf.lockBlock(NO);
+            self.lockBlock(self.locked);
         }
-        
-    }];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -10,11 +10,23 @@
 
 static NSString * const SettingCellId = @"SettingCellId";
 
-@class MYZSettingItem;
+@class MYZSettingItem, MYZSettingSwitchItem;
+
+
+
+@protocol MYZSettingCellDelegate <NSObject>
+
+- (void)settingCellChangeSwitchItem:(MYZSettingSwitchItem *)item;
+
+@end
+
+
 
 @interface MYZSettingCell : UITableViewCell
 
 @property (nonatomic, strong) MYZSettingItem * itemData;
+
+@property (nonatomic, assign) id<MYZSettingCellDelegate> delegate;
 
 
 + (id)settingCellWithTableView:(UITableView *)tableView;

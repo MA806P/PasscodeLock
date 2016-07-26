@@ -8,14 +8,13 @@
 
 #import "MYZMineGestureController.h"
 #import "MYZNextViewController.h"
+#import "MYZSettingCell.h"
 
 NSString * const item1LabelText = @"手势密码";
 NSString * const item2LabelText = @"显示手势轨迹";
 
 
-@interface MYZMineGestureController ()
-
-@property (nonatomic, strong) MYZSettingSwitchItem * item1;
+@interface MYZMineGestureController () <MYZSettingCellDelegate>
 
 @end
 
@@ -26,27 +25,25 @@ NSString * const item2LabelText = @"显示手势轨迹";
     [super viewDidLoad];
     self.title = @"手势";
     
-    
-    self.item1 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:item1LabelText];
-    BOOL isSwitchOn = [[NSUserDefaults standardUserDefaults] boolForKey:item1LabelText];
-    self.item1.switchOn = isSwitchOn;
-    [self.item1 addObserver:self forKeyPath:@"switchOn" options:NSKeyValueObservingOptionNew context:nil];
-    [self resetDatasourceArray:isSwitchOn];
-    
+    [self resetDatasourceArray];
     
 }
 
 
-- (void)resetDatasourceArray:(BOOL)isSwitchOn
+- (void)resetDatasourceArray
 {
     self.dataSources = nil;
+    
+    BOOL isSwitchOn = [[NSUserDefaults standardUserDefaults] boolForKey:item1LabelText];
+    MYZSettingSwitchItem * item1 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:item1LabelText];
+    item1.switchOn = isSwitchOn;
     
     if (isSwitchOn)
     {
         MYZSettingSwitchItem * item2 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:item2LabelText];
         item2.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:item2LabelText];
         MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
-        group1.items = @[self.item1, item2];
+        group1.items = @[item1, item2];
         
         MYZSettingPushItem * item3 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改手势密码" andNextClass:[UIViewController class]];
         MYZSettingGroup * group2 = [[MYZSettingGroup alloc] init];
@@ -57,7 +54,7 @@ NSString * const item2LabelText = @"显示手势轨迹";
     else
     {
         MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
-        group1.items = @[self.item1];
+        group1.items = @[item1];
         self.dataSources = @[group1];
     }
 
@@ -65,36 +62,45 @@ NSString * const item2LabelText = @"显示手势轨迹";
 }
 
 
+#pragma mark - MYZSetting cell delegate
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+- (void)settingCellChangeSwitchItem:(MYZSettingSwitchItem *)item
 {
-    
-    //NSLog(@" %@ %@  %@",keyPath, object, [change objectForKey:NSKeyValueChangeNewKey]);
-    //switchOn <MYZSettingSwitchItem: 0x7beb6150>  1
-    
-    MYZSettingSwitchItem * item = (MYZSettingSwitchItem *)object;
-    
-    MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
-    [self presentViewController:nvc animated:YES completion:nil];
-    
-    nvc.lockBlock = ^(BOOL locked){
-        [[NSUserDefaults standardUserDefaults] setBool:locked forKey:item.labelText];
-        if (locked) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:item2LabelText];
-        }
-        item.switchOn = locked;
-        [self resetDatasourceArray:locked];
-    };
-    [self.tableView reloadData];
+    if([item.labelText isEqualToString:item1LabelText])
+    {
+        __weak typeof(self) weakSelf = self;
+        
+        MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
+        nvc.locked = item.isSwitchOn;
+        nvc.lockBlock = ^(BOOL locked){
+            [[NSUserDefaults standardUserDefaults] setBool:locked forKey:item1LabelText];
+            
+            if (locked && !item.isSwitchOn)
+            {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:item2LabelText];
+            }
+            else if (!locked && item.isSwitchOn)
+            {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:item2LabelText];
+            }
+            [weakSelf resetDatasourceArray];
+            [weakSelf.tableView reloadData];
+        };
+        
+        [self presentViewController:nvc animated:YES completion:nil];
+        
+    }
+    else if([item.labelText isEqualToString:item2LabelText])
+    {
+        item.switchOn = !item.isSwitchOn;
+        NSLog(@" 显示手势轨迹 %d ",item.isSwitchOn);
+        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:item2LabelText];
+    }
     
 }
 
 
 
-- (void)dealloc
-{
-    [self.item1 removeObserver:self forKeyPath:@"switchOn"];
-}
 
 
 

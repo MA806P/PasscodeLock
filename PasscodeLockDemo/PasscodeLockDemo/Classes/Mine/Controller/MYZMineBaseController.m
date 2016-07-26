@@ -10,7 +10,7 @@
 
 #import "MYZSettingCell.h"
 
-@interface MYZMineBaseController ()
+@interface MYZMineBaseController () 
 
 
 
@@ -62,6 +62,7 @@
     cell.itemData = item;
     if ([item isKindOfClass:[MYZSettingSwitchItem class]])
     {
+        cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -100,6 +101,8 @@
     MYZSettingGroup * group = self.dataSources[section];
     return group.footerTitle;
 }
+
+
 
 
 @end

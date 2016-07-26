@@ -74,8 +74,11 @@
 - (void)switchChanged:(UISwitch *)switchView
 {
     MYZSettingSwitchItem * item = (MYZSettingSwitchItem *)self.itemData;
-    item.switchOn = switchView.isOn;
     
+    if ([self.delegate respondsToSelector:@selector(settingCellChangeSwitchItem:)])
+    {
+        [self.delegate settingCellChangeSwitchItem:item];
+    }
     
     
 }

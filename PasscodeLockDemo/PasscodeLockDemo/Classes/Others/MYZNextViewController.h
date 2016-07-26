@@ -12,6 +12,9 @@ typedef void(^GestureSetLock)(BOOL locked);
 
 @interface MYZNextViewController : UIViewController
 
+
+@property (nonatomic, assign)BOOL locked;
+
 @property (nonatomic, copy)GestureSetLock lockBlock;
 
 @end
