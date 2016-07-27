@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 #import "MYZTabBarController.h"
+#import "MYZMineBaseController.h"
+#import "MYZLockView.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) MYZLockView * firstView;
 
 @end
 
@@ -25,12 +29,30 @@
     [self.window setRootViewController:rootVC];
     [self.window makeKeyAndVisible];
     
+    [self addLockView];
+    
     return YES;
+}
+
+- (void)addLockView
+{
+    //手势解锁开关
+    BOOL gestureLock = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
+    //密码解锁开关
+    BOOL passcodeLock = [[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText];
+    
+    if (gestureLock || passcodeLock)
+    {
+        self.firstView = [[MYZLockView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.firstView];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [self addLockView];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

@@ -27,7 +27,7 @@
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
 		18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A971D265D9C001AB2FB /* LaunchScreen.storyboard */; };
-		DA3D6EC11D46586500DA5C8E /* MYZLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3D6EC01D46586500DA5C8E /* MYZLockView.m */; };
+		DAE30E121D48FEF900FEE2E7 /* MYZLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,8 +69,8 @@
 		18D50A951D265D9C001AB2FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D50A981D265D9C001AB2FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18D50A9A1D265D9C001AB2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA3D6EBF1D46586500DA5C8E /* MYZLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZLockView.h; sourceTree = "<group>"; };
-		DA3D6EC01D46586500DA5C8E /* MYZLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZLockView.m; sourceTree = "<group>"; };
+		DAE30E101D48FEF900FEE2E7 /* MYZLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZLockView.h; sourceTree = "<group>"; };
+		DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZLockView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +130,6 @@
 			children = (
 				18810F211D3F61A7003058BA /* MYZNextViewController.h */,
 				18810F221D3F61A7003058BA /* MYZNextViewController.m */,
-				DA3D6EBF1D46586500DA5C8E /* MYZLockView.h */,
-				DA3D6EC01D46586500DA5C8E /* MYZLockView.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -173,6 +171,8 @@
 		18810F2C1D3F68BC003058BA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DAE30E101D48FEF900FEE2E7 /* MYZLockView.h */,
+				DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */,
 				18810F441D3F73AA003058BA /* MYZSettingCell.h */,
 				18810F451D3F73AA003058BA /* MYZSettingCell.m */,
 			);
@@ -317,7 +317,7 @@
 				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
-				DA3D6EC11D46586500DA5C8E /* MYZLockView.m in Sources */,
+				DAE30E121D48FEF900FEE2E7 /* MYZLockView.m in Sources */,
 				18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */,
 				189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */,
 				18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */,

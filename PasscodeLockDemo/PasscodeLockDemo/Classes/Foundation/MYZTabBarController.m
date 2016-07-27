@@ -13,8 +13,6 @@
 
 @interface MYZTabBarController ()
 
-@property (nonatomic, strong) UIView * firstView;
-
 @end
 
 @implementation MYZTabBarController
@@ -30,26 +28,10 @@
     [self addChildController:mineVc title:@"我的" imageName:@"tab_2"];
     self.selectedIndex = 1;
     
-    self.firstView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.firstView.backgroundColor =[UIColor colorWithWhite:0.667 alpha:1.0];
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
-    [self.firstView addGestureRecognizer:tap];
-    [self.view addSubview:self.firstView];
+    
 }
 
-- (void)closse
-{
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [UIView animateWithDuration:0.8 animations:^{
-        weakSelf.firstView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [weakSelf.firstView removeFromSuperview];
-    }];
-    
-    
-}
+
 
 //添加子控制器
 - (void)addChildController:(UIViewController *)vc title:(NSString *)title imageName:(NSString *)imageName
