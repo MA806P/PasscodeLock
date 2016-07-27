@@ -7,8 +7,14 @@
 //
 
 #import "MYZMinePasscodeController.h"
+#import "MYZSettingCell.h"
+#import "MYZNextViewController.h"
 
-@interface MYZMinePasscodeController ()
+NSString * const PasscodeText = @"密码";
+NSString * const TouchIDText = @"Touch ID";
+NSString * const RemindTouchID = @"启动时提示使用Touch ID";
+
+@interface MYZMinePasscodeController ()<MYZSettingCellDelegate>
 
 @end
 
@@ -16,22 +22,98 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    [self resetDatasourceArray];
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+- (void)resetDatasourceArray
+{
+    self.dataSources = nil;
+    
+    BOOL isSwitchOn = [[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText];
+    MYZSettingSwitchItem * item1 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:PasscodeText];
+    item1.switchOn = isSwitchOn;
+    
+    if (isSwitchOn)
+    {
+        MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
+        
+         MYZSettingPushItem * item2 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改密码" andNextClass:[UIViewController class]];
+        
+        MYZSettingSwitchItem * item3 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:TouchIDText];
+        item3.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:TouchIDText];
+        
+        if (item3.isSwitchOn)
+        {
+            MYZSettingSwitchItem * item4 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:RemindTouchID];
+            item4.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:RemindTouchID];
+            group1.items = @[item1, item2, item3, item4];
+        }
+        else
+        {
+            group1.items = @[item1, item2, item3];
+        }
+        
+        self.dataSources = @[group1];
+    }
+    else
+    {
+        MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
+        group1.items = @[item1];
+        self.dataSources = @[group1];
+    }
+    
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)settingCellChangeSwitchItem:(MYZSettingSwitchItem *)item
+{
+    if ([item.labelText isEqualToString:PasscodeText])
+    {
+        __weak typeof(self) weakSelf = self;
+        
+        MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
+        nvc.locked = item.isSwitchOn;
+        nvc.lockBlock = ^(BOOL locked){
+        
+            [[NSUserDefaults standardUserDefaults] setBool:locked forKey:PasscodeText];
+            if (locked && !item.isSwitchOn)
+            {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:TouchIDText];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:RemindTouchID];
+            }
+            else if (!locked && item.isSwitchOn)
+            {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:TouchIDText];
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RemindTouchID];
+            }
+                
+            [weakSelf resetDatasourceArray];
+            [weakSelf.tableView reloadData];
+        };
+        
+        [self presentViewController:nvc animated:YES completion:nil];
+    }
+    else if ([item.labelText isEqualToString:TouchIDText])
+    {
+        item.switchOn = !item.isSwitchOn;
+        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:TouchIDText];
+        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:RemindTouchID];
+        [self resetDatasourceArray];
+        [self.tableView reloadData];
+    }
+    else if ([item.labelText isEqualToString:RemindTouchID])
+    {
+        item.switchOn = !item.isSwitchOn;
+        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:RemindTouchID];
+    }
+    
 }
-*/
+
 
 @end
