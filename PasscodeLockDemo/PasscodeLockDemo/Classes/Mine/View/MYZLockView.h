@@ -10,4 +10,8 @@
 
 @interface MYZLockView : UIScrollView
 
+@property (nonatomic, assign) BOOL showPasscodeViewBool;
+
+@property (nonatomic, assign) BOOL showGestureViewBool;
+
 @end

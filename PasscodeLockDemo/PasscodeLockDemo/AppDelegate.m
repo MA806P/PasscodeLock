@@ -13,8 +13,6 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) MYZLockView * firstView;
-
 @end
 
 @implementation AppDelegate
@@ -43,8 +41,10 @@
     
     if (gestureLock || passcodeLock)
     {
-        self.firstView = [[MYZLockView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.firstView];
+        MYZLockView * lockView = [[MYZLockView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        lockView.showGestureViewBool = gestureLock;
+        lockView.showPasscodeViewBool = passcodeLock;
+        [[UIApplication sharedApplication].keyWindow addSubview:lockView];
     }
 }
 

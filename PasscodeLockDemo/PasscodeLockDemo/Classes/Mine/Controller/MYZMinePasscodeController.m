@@ -10,9 +10,7 @@
 #import "MYZSettingCell.h"
 #import "MYZNextViewController.h"
 
-//NSString * const PasscodeText = @"密码";
-//NSString * const TouchIDText = @"Touch ID";
-//NSString * const RemindTouchID = @"启动时提示使用Touch ID";
+
 
 @interface MYZMinePasscodeController ()<MYZSettingCellDelegate>
 
@@ -22,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"密码";
     
     [self resetDatasourceArray];
     
