@@ -8,6 +8,11 @@
 
 #import "MYZMineBaseController.h"
 
+FOUNDATION_EXPORT NSString * const PasscodeText;
+FOUNDATION_EXPORT NSString * const TouchIDText;
+FOUNDATION_EXPORT NSString * const RemindTouchID;
+
+
 @interface MYZMinePasscodeController : MYZMineBaseController
 
 @end

@@ -7,10 +7,18 @@
 //
 
 #import "MYZMineBaseController.h"
-
 #import "MYZSettingCell.h"
 
-@interface MYZMineBaseController () 
+NSString * const GestureText = @"手势密码";
+NSString * const GestureRaceText = @"显示手势轨迹";
+
+NSString * const PasscodeText = @"密码";
+NSString * const TouchIDText = @"Touch ID";
+NSString * const RemindTouchID = @"启动时提示使用Touch ID";
+
+
+
+@interface MYZMineBaseController () <MYZSettingCellDelegate>
 
 
 
@@ -102,7 +110,8 @@
     return group.footerTitle;
 }
 
-
+#pragma mark - MYZSettingCellDelegate
+- (void)settingCellChangeSwitchItem:(MYZSettingSwitchItem *)item {}
 
 
 @end

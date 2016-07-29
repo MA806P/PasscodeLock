@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+FOUNDATION_EXPORT NSString * const GestureText;
+FOUNDATION_EXPORT NSString * const PasscodeText;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

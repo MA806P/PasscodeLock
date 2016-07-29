@@ -13,12 +13,12 @@
 #import "MYZSettingCheckItem.h"
 #import "MYZSettingSwitchItem.h"
 
-static NSString * const GestureText = @"手势密码";
-static NSString * const GestureRaceText = @"显示手势轨迹";
-
-static NSString * const PasscodeText = @"密码";
-static NSString * const TouchIDText = @"Touch ID";
-static NSString * const RemindTouchID = @"启动时提示使用Touch ID";
+//static NSString * const GestureText = @"手势密码";
+//static NSString * const GestureRaceText = @"显示手势轨迹";
+//
+//static NSString * const PasscodeText = @"密码";
+//static NSString * const TouchIDText = @"Touch ID";
+//static NSString * const RemindTouchID = @"启动时提示使用Touch ID";
 
 
 @interface MYZMineBaseController : UITableViewController

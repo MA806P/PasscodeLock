@@ -8,6 +8,10 @@
 
 #import "MYZMineBaseController.h"
 
+FOUNDATION_EXPORT NSString * const GestureText;
+FOUNDATION_EXPORT NSString * const GestureRaceText;
+
+
 @interface MYZMineGestureController : MYZMineBaseController
 
 @end
