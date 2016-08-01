@@ -29,6 +29,7 @@
 		18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A971D265D9C001AB2FB /* LaunchScreen.storyboard */; };
 		DA650C071D4A47F6000818C5 /* MYZGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA650C061D4A47F6000818C5 /* MYZGestureView.m */; };
 		DA650C0A1D4A4804000818C5 /* MYZPasscodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA650C091D4A4804000818C5 /* MYZPasscodeView.m */; };
+		DA8426D91D4F859900FBD962 /* MYZCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8426D81D4F859900FBD962 /* MYZCircleView.m */; };
 		DAE30E121D48FEF900FEE2E7 /* MYZLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		DA650C061D4A47F6000818C5 /* MYZGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZGestureView.m; sourceTree = "<group>"; };
 		DA650C081D4A4804000818C5 /* MYZPasscodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZPasscodeView.h; sourceTree = "<group>"; };
 		DA650C091D4A4804000818C5 /* MYZPasscodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZPasscodeView.m; sourceTree = "<group>"; };
+		DA8426D71D4F859900FBD962 /* MYZCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZCircleView.h; sourceTree = "<group>"; };
+		DA8426D81D4F859900FBD962 /* MYZCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZCircleView.m; sourceTree = "<group>"; };
 		DAE30E101D48FEF900FEE2E7 /* MYZLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZLockView.h; sourceTree = "<group>"; };
 		DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZLockView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -239,6 +242,8 @@
 			children = (
 				DA650C051D4A47F6000818C5 /* MYZGestureView.h */,
 				DA650C061D4A47F6000818C5 /* MYZGestureView.m */,
+				DA8426D71D4F859900FBD962 /* MYZCircleView.h */,
+				DA8426D81D4F859900FBD962 /* MYZCircleView.m */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 			files = (
 				18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */,
 				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
+				DA8426D91D4F859900FBD962 /* MYZCircleView.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
 				DAE30E121D48FEF900FEE2E7 /* MYZLockView.m in Sources */,

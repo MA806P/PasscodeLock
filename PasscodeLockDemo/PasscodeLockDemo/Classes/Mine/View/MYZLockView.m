@@ -79,7 +79,7 @@
     
     if (self.showGestureViewBool)
     {
-        self.gestureView.frame = CGRectMake(10, 10, 100, 100);
+        self.gestureView.frame = CGRectMake(20, 20, 280, 280);
     }
     
     if (self.showPasscodeViewBool)
