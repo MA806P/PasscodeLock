@@ -8,6 +8,8 @@
 
 #import "MYZCircleView.h"
 
+#define CircleNormalBorderColor [UIColor whiteColor];
+
 @implementation MYZCircleView
 
 // Only override drawRect: if you perform custom drawing.
@@ -18,11 +20,19 @@
     
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
-    CGContextAddEllipseInRect(cr, rect);
+    CGFloat circleDiameter = MIN(rect.size.width, rect.size.height) - 2;
+    CGRect circleInRect = CGRectMake(1, 1, circleDiameter, circleDiameter);
+    CGContextAddEllipseInRect(cr, circleInRect);
     CGContextSetLineWidth(cr, 1.0);
     [[UIColor whiteColor] set];
     
     CGContextStrokePath(cr);
+    
+    CGFloat filledCircleDiameter = circleDiameter * 0.4;
+    CGFloat filledCircleX = (rect.size.width - filledCircleDiameter)*0.5;
+    CGFloat filledCircleY = (rect.size.height - filledCircleDiameter)*0.5;
+    CGContextAddEllipseInRect(cr, CGRectMake(filledCircleX, filledCircleY, filledCircleDiameter, filledCircleDiameter));
+    
     
 }
 

@@ -9,6 +9,13 @@
 #import "MYZGestureView.h"
 #import "MYZCircleView.h"
 
+
+CGFloat const CircleMarginBorder = 5.0f;
+CGFloat const CircleMarginNear = 30.0f;
+
+NSInteger const CircleViewBaseTag = 100;
+
+
 @implementation MYZGestureView
 
 
@@ -31,16 +38,15 @@
     return self;
 }
 
-
+//子视图初始化
 - (void)initSubviews
 {
     self.backgroundColor = [UIColor blackColor];
     
-    
     for (int i=0; i<9; i++)
     {
         MYZCircleView * circle = [[MYZCircleView alloc] init];
-        circle.tag = i+100;
+        circle.tag = i+CircleViewBaseTag;
         [self addSubview:circle];
     }
 }
@@ -50,22 +56,20 @@
 {
     [super layoutSubviews];
     
-    CGFloat marginBorder = 5;
-    CGFloat marginNear = 8;
-    
+    //手势解锁视图的大小
     CGFloat squareWH = MIN(self.frame.size.width, self.frame.size.height);
-    CGFloat circleWH = (squareWH - (marginBorder+marginNear)*2)/3.0;
+    //小圆的大小
+    CGFloat circleWH = (squareWH - (CircleMarginBorder+CircleMarginNear)*2.0)/3.0;
     
     
     for (int i = 0; i < 9; i++)
     {
-        
-        MYZCircleView * circleView = [self viewWithTag:i+100];
+        MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
         
         NSInteger currentRow = i / 3;
         NSInteger currentColumn = i % 3;
-        CGFloat circleX = marginBorder + (marginNear + circleWH) * currentRow;
-        CGFloat circleY = marginBorder + (marginNear + circleWH) * currentColumn;
+        CGFloat circleX = CircleMarginBorder + (CircleMarginNear + circleWH) * currentRow;
+        CGFloat circleY = CircleMarginBorder + (CircleMarginNear + circleWH) * currentColumn;
         
         circleView.frame = CGRectMake(circleX, circleY, circleWH, circleWH);
     }
