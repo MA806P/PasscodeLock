@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    CircleViewStatusNormal,
+    CircleViewStatusSelected,
+    CircleViewStatusError,
+} CircleViewStatus;
+
 @interface MYZCircleView : UIView
+
+@property (nonatomic, assign) CircleViewStatus circleStatus;
+
 
 @end

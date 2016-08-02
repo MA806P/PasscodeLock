@@ -18,17 +18,6 @@ NSInteger const CircleViewBaseTag = 100;
 
 @implementation MYZGestureView
 
-
--(instancetype)init
-{
-    if (self = [super init])
-    {
-        [self initSubviews];
-    }
-    return self;
-}
-
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame])
@@ -75,6 +64,30 @@ NSInteger const CircleViewBaseTag = 100;
     }
     
 }
+
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch * touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    
+    for (int i = 0; i < 9; i++)
+    {
+        MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
+        
+        if(CGRectContainsPoint(circleView.frame, touchPoint))
+        {
+            
+        }
+        
+    }
+    
+    
+}
+
+
+
 
 
 

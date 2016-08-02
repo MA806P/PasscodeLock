@@ -8,12 +8,30 @@
 
 #import "MYZCircleView.h"
 
-#define CircleNormalBorderColor [UIColor whiteColor];
+#define CircleNormalColor [UIColor whiteColor];
+#define CircleSelectedColor [UIColor blueColor];
+#define CircleErrorColor [UIColor redColor];
+
+@interface MYZCircleView ()
+
+@property (nonatomic, strong) UIColor * circleColor;
+
+@end
 
 @implementation MYZCircleView
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
+        self.circleStatus = CircleViewStatusNormal;
+    }
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
@@ -24,17 +42,45 @@
     CGRect circleInRect = CGRectMake(1, 1, circleDiameter, circleDiameter);
     CGContextAddEllipseInRect(cr, circleInRect);
     CGContextSetLineWidth(cr, 1.0);
-    [[UIColor whiteColor] set];
-    
+    [self.circleColor set];
     CGContextStrokePath(cr);
     
-    CGFloat filledCircleDiameter = circleDiameter * 0.4;
-    CGFloat filledCircleX = (rect.size.width - filledCircleDiameter)*0.5;
-    CGFloat filledCircleY = (rect.size.height - filledCircleDiameter)*0.5;
-    CGContextAddEllipseInRect(cr, CGRectMake(filledCircleX, filledCircleY, filledCircleDiameter, filledCircleDiameter));
+    
+    if (self.circleStatus != CircleViewStatusNormal)
+    {
+        CGFloat filledCircleDiameter = circleDiameter * 0.4;
+        CGFloat filledCircleX = (rect.size.width - filledCircleDiameter)*0.5;
+        CGFloat filledCircleY = (rect.size.height - filledCircleDiameter)*0.5;
+        CGContextAddEllipseInRect(cr, CGRectMake(filledCircleX, filledCircleY, filledCircleDiameter, filledCircleDiameter));
+        [self.circleColor set];
+        CGContextFillPath(cr);
+    }
     
     
 }
+
+
+- (void)setCircleStatus:(CircleViewStatus)circleStatus
+{
+    _circleStatus = circleStatus;
+    
+    if (_circleStatus == CircleViewStatusNormal)
+    {
+        self.circleColor = CircleNormalColor;
+    }
+    else if (_circleStatus == CircleViewStatusSelected)
+    {
+        self.circleColor = CircleSelectedColor;
+    }
+    else if (_circleStatus == CircleViewStatusError)
+    {
+        self.circleColor = CircleErrorColor;
+    }
+    
+    [self setNeedsDisplay];
+}
+
+
 
 
 @end
