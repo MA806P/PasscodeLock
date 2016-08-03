@@ -36,6 +36,10 @@
 {
     // Drawing code
     
+    
+    self.clearsContextBeforeDrawing = YES;
+    
+    
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
     CGFloat circleDiameter = MIN(rect.size.width, rect.size.height) - 2;

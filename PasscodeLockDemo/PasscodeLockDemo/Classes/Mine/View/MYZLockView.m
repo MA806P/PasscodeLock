@@ -26,8 +26,6 @@
     {
         self.backgroundColor =[UIColor colorWithWhite:0.667 alpha:1.0];
         self.showsHorizontalScrollIndicator = NO;
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
-        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -39,7 +37,11 @@
     
     if (showGestureViewBool)
     {
+        //__weak typeof(self) weakSelf = self;
         MYZGestureView * gestureView = [[MYZGestureView alloc] init];
+        gestureView.gestureResult = ^(NSString * gestureCode){
+            NSLog(@" MYZLockView -- %@", gestureCode);
+        };
         [self addSubview:gestureView];
         self.gestureView = gestureView;
     }
@@ -101,15 +103,11 @@
 
 - (void)closse
 {
-    
-    __weak typeof(self) weakSelf = self;
-    
     [UIView animateWithDuration:0.8 animations:^{
-        weakSelf.alpha = 0;
+        self.alpha = 0;
     } completion:^(BOOL finished) {
-        [weakSelf removeFromSuperview];
+        [self removeFromSuperview];
     }];
-    
     
 }
 

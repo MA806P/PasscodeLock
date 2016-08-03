@@ -16,7 +16,33 @@ CGFloat const CircleMarginNear = 30.0f;
 NSInteger const CircleViewBaseTag = 100;
 
 
+@interface MYZGestureView ()
+
+@property (nonatomic, strong) NSMutableArray * selectCircleArray;
+
+@property (nonatomic, assign) CGPoint currentTouchPoint;
+
+//@property (nonatomic, copy) void(^success)(NSString * gestureCode);
+//@property (nonatomic, copy) void(^failure)(NSString * erroMessage);
+
+
+@end
+
+
 @implementation MYZGestureView
+
+
+- (NSMutableArray *)selectCircleArray
+{
+    if (_selectCircleArray == nil)
+    {
+        _selectCircleArray = [NSMutableArray array];
+    }
+    return _selectCircleArray;
+}
+
+
+#pragma mark - initializer
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -57,37 +83,103 @@ NSInteger const CircleViewBaseTag = 100;
         
         NSInteger currentRow = i / 3;
         NSInteger currentColumn = i % 3;
-        CGFloat circleX = CircleMarginBorder + (CircleMarginNear + circleWH) * currentRow;
-        CGFloat circleY = CircleMarginBorder + (CircleMarginNear + circleWH) * currentColumn;
+        CGFloat circleX = CircleMarginBorder + (CircleMarginNear + circleWH) * currentColumn;
+        CGFloat circleY = CircleMarginBorder + (CircleMarginNear + circleWH) * currentRow;
         
         circleView.frame = CGRectMake(circleX, circleY, circleWH, circleWH);
     }
     
 }
 
+//- (void)gestureOperatedSuccess:(void (^)(NSString *))success failure:(void (^)(NSString *))failure
+//{
+//    self.success = success;
+//    self.failure = failure;
+//}
 
+#pragma mark - draw view
+
+- (void)drawRect:(CGRect)rect
+{
+    if (self.selectCircleArray.count <= 0) { return; }
+    
+    MYZCircleView * circleView = [self.selectCircleArray firstObject];
+    CGPoint circleCentre = circleView.center;
+    CGContextRef cr = UIGraphicsGetCurrentContext();
+    
+    CGContextMoveToPoint(cr, circleCentre.x, circleCentre.y);
+    CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
+    
+    CGContextSetLineCap(cr, kCGLineCapRound); //线移动时的形状
+    CGContextSetLineJoin(cr, kCGLineJoinRound); //线段转角处的形状
+    CGContextSetLineWidth(cr, 6);
+    [[UIColor whiteColor] set];
+    //渲染
+    CGContextStrokePath(cr);
+    
+}
+
+
+#pragma mark - Touch event
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    
+    [self.selectCircleArray removeAllObjects];
+    
+    
     UITouch * touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self];
+    self.currentTouchPoint = touchPoint;
+    [self checkCircleViewTouchWithPoint:touchPoint];
     
-    for (int i = 0; i < 9; i++)
+}
+
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch * touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    self.currentTouchPoint = touchPoint;
+    [self checkCircleViewTouchWithPoint:touchPoint];
+    
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    NSMutableString * gestureCode = [NSMutableString string];
+    for (MYZCircleView * circleView in self.selectCircleArray)
     {
-        MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
-        
-        if(CGRectContainsPoint(circleView.frame, touchPoint))
-        {
-            
-        }
-        
+        [gestureCode appendFormat:@"%ld",circleView.tag - CircleViewBaseTag];
+        circleView.circleStatus = CircleViewStatusNormal;
+    }
+    
+    
+    if (gestureCode.length > 0 && self.gestureResult != nil)
+    {
+        self.gestureResult(gestureCode);
     }
     
     
 }
 
 
-
+- (void)checkCircleViewTouchWithPoint:(CGPoint)point
+{
+    for (int i = 0; i < 9; i++)
+    {
+        MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
+        
+        if(CGRectContainsPoint(circleView.frame, point) && ![self.selectCircleArray containsObject:circleView])
+        {
+            circleView.circleStatus = CircleViewStatusSelected;
+            [self.selectCircleArray addObject:circleView];
+        }
+    }
+    
+    [self setNeedsDisplay];
+}
 
 
 
