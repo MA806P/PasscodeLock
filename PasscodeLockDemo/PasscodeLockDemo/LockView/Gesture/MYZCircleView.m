@@ -27,6 +27,7 @@
 {
     if (self = [super initWithFrame:frame])
     {
+        self.backgroundColor = [UIColor clearColor];
         self.circleStatus = CircleViewStatusNormal;
     }
     return self;
@@ -36,11 +37,8 @@
 {
     // Drawing code
     
-    
-    self.clearsContextBeforeDrawing = YES;
-    
-    
     CGContextRef cr = UIGraphicsGetCurrentContext();
+    CGContextClearRect(cr, rect);
     
     CGFloat circleDiameter = MIN(rect.size.width, rect.size.height) - 2;
     CGRect circleInRect = CGRectMake(1, 1, circleDiameter, circleDiameter);

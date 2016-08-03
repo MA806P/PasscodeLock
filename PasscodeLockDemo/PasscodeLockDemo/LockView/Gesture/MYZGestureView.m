@@ -10,8 +10,9 @@
 #import "MYZCircleView.h"
 
 
-CGFloat const CircleMarginBorder = 5.0f;
-CGFloat const CircleMarginNear = 30.0f;
+
+CGFloat const CircleViewMarginBorder = 5.0f;
+CGFloat const CircleViewMarginNear = 30.0f;
 
 NSInteger const CircleViewBaseTag = 100;
 
@@ -56,7 +57,7 @@ NSInteger const CircleViewBaseTag = 100;
 //子视图初始化
 - (void)initSubviews
 {
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor clearColor];
     
     for (int i=0; i<9; i++)
     {
@@ -74,7 +75,7 @@ NSInteger const CircleViewBaseTag = 100;
     //手势解锁视图的大小
     CGFloat squareWH = MIN(self.frame.size.width, self.frame.size.height);
     //小圆的大小
-    CGFloat circleWH = (squareWH - (CircleMarginBorder+CircleMarginNear)*2.0)/3.0;
+    CGFloat circleWH = (squareWH - (CircleViewMarginBorder+CircleViewMarginNear)*2.0)/3.0;
     
     
     for (int i = 0; i < 9; i++)
@@ -83,35 +84,53 @@ NSInteger const CircleViewBaseTag = 100;
         
         NSInteger currentRow = i / 3;
         NSInteger currentColumn = i % 3;
-        CGFloat circleX = CircleMarginBorder + (CircleMarginNear + circleWH) * currentColumn;
-        CGFloat circleY = CircleMarginBorder + (CircleMarginNear + circleWH) * currentRow;
+        CGFloat circleX = CircleViewMarginBorder + (CircleViewMarginNear + circleWH) * currentColumn;
+        CGFloat circleY = CircleViewMarginBorder + (CircleViewMarginNear + circleWH) * currentRow;
         
         circleView.frame = CGRectMake(circleX, circleY, circleWH, circleWH);
     }
     
 }
 
-//- (void)gestureOperatedSuccess:(void (^)(NSString *))success failure:(void (^)(NSString *))failure
-//{
-//    self.success = success;
-//    self.failure = failure;
-//}
 
 #pragma mark - draw view
 
 - (void)drawRect:(CGRect)rect
 {
-    if (self.selectCircleArray.count <= 0) { return; }
-    
-    MYZCircleView * circleView = [self.selectCircleArray firstObject];
-    CGPoint circleCentre = circleView.center;
+    self.clearsContextBeforeDrawing = YES;
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
-    CGContextMoveToPoint(cr, circleCentre.x, circleCentre.y);
-    CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
+    //剪切，画线只能在圆外画
+    CGContextAddRect(cr, rect);
+    for (int i = 0; i < 9; i++)
+    {
+        MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
+        CGContextAddEllipseInRect(cr, circleView.frame);
+    }
+    CGContextEOClip(cr);
     
-    CGContextSetLineCap(cr, kCGLineCapRound); //线移动时的形状
-    CGContextSetLineJoin(cr, kCGLineJoinRound); //线段转角处的形状
+    
+    //画线
+    for (int i = 0; i<self.selectCircleArray.count; i++)
+    {
+        MYZCircleView * circleView = self.selectCircleArray[i];
+        CGPoint circleCentre = circleView.center;
+        if (i == 0)
+        {
+            CGContextMoveToPoint(cr, circleCentre.x, circleCentre.y);
+        }
+        else
+        {
+            CGContextAddLineToPoint(cr, circleCentre.x, circleCentre.y);
+        }
+    }
+    
+    if (self.selectCircleArray.count > 0)
+    {
+        CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
+    }
+    
+    CGContextSetLineCap(cr, kCGLineCapRound);
     CGContextSetLineWidth(cr, 6);
     [[UIColor whiteColor] set];
     //渲染
@@ -124,25 +143,14 @@ NSInteger const CircleViewBaseTag = 100;
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
-    [self.selectCircleArray removeAllObjects];
-    
-    
-    UITouch * touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self];
-    self.currentTouchPoint = touchPoint;
-    [self checkCircleViewTouchWithPoint:touchPoint];
-    
+    [self checkCircleViewTouch:touches];
 }
 
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    UITouch * touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self];
-    self.currentTouchPoint = touchPoint;
-    [self checkCircleViewTouchWithPoint:touchPoint];
-    
+    [self checkCircleViewTouch:touches];
+    [self setNeedsDisplay];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -161,12 +169,20 @@ NSInteger const CircleViewBaseTag = 100;
         self.gestureResult(gestureCode);
     }
     
-    
+    [self.selectCircleArray removeAllObjects];
+    [self setNeedsDisplay];
 }
 
 
-- (void)checkCircleViewTouchWithPoint:(CGPoint)point
+
+
+
+- (void)checkCircleViewTouch:(NSSet *)touches
 {
+    UITouch *touch =  [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    self.currentTouchPoint = point;
+    
     for (int i = 0; i < 9; i++)
     {
         MYZCircleView * circleView = [self viewWithTag:i+CircleViewBaseTag];
@@ -175,10 +191,9 @@ NSInteger const CircleViewBaseTag = 100;
         {
             circleView.circleStatus = CircleViewStatusSelected;
             [self.selectCircleArray addObject:circleView];
+            break;
         }
     }
-    
-    [self setNeedsDisplay];
 }
 
 

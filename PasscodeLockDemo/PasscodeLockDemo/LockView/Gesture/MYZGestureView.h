@@ -10,8 +10,6 @@
 
 @interface MYZGestureView : UIView
 
-//- (void)gestureOperatedSuccess:(void (^)(NSString * gestureCode))success failure:(void (^)(NSString * erroMessage))failure;
-
 @property (nonatomic, copy) void(^gestureResult)(NSString * gestureCode);
 
 
