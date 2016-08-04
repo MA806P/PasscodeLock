@@ -9,6 +9,7 @@
 #import "MYZMineGestureController.h"
 #import "MYZNextViewController.h"
 #import "MYZSettingCell.h"
+#import "MYZMineGestureSetController.h"
 
 @interface MYZMineGestureController () <MYZSettingCellDelegate>
 
@@ -64,6 +65,12 @@
 {
     if([item.labelText isEqualToString:GestureText])
     {
+        
+        BOOL gestureLocked = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
+        
+        if (gestureLocked)
+        {
+            
         __weak typeof(self) weakSelf = self;
         
         MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
@@ -84,6 +91,12 @@
         };
         
         [self presentViewController:nvc animated:YES completion:nil];
+        }
+        else
+        {
+            MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+            [self.navigationController pushViewController:gestureSetVC animated:YES];
+        }
         
     }
     else if([item.labelText isEqualToString:GestureRaceText])

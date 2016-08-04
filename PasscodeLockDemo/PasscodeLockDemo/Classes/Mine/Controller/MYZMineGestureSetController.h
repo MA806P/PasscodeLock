@@ -14,8 +14,12 @@ typedef enum: NSUInteger {
     
 }GestureSetType;
 
+//typedef void(^GestureSetLock)(BOOL locked);
+
 @interface MYZMineGestureSetController : UIViewController
 
 @property (nonatomic, assign) GestureSetType gestureSetType;
+
+//@property (nonatomic, copy)GestureSetLock lockBlock;
 
 @end

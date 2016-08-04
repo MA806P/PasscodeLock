@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
 } GestureViewStatus;
 
 
-#define CircleNormalColor [UIColor whiteColor];
+#define CircleNormalColor [UIColor colorWithWhite:0.498 alpha:1.000];
 #define CircleSelectedColor [UIColor blueColor];
 #define CircleErrorColor [UIColor redColor];
 
