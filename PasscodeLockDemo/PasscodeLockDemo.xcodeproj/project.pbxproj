@@ -23,6 +23,8 @@
 		189B969B1D40B0FC00219B25 /* MYZMineLockTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B969A1D40B0FC00219B25 /* MYZMineLockTypeController.m */; };
 		189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B969D1D40B3B400219B25 /* MYZMineGestureController.m */; };
 		189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */; };
+		18AE364F1D53415B0024ECB3 /* MYZMineGestureSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE364E1D53415B0024ECB3 /* MYZMineGestureSetController.m */; };
+		18AE36521D5345E70024ECB3 /* MYZGestureShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */; };
 		18D50A8B1D265D9C001AB2FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8A1D265D9C001AB2FB /* main.m */; };
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
@@ -65,6 +67,10 @@
 		189B969D1D40B3B400219B25 /* MYZMineGestureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineGestureController.m; sourceTree = "<group>"; };
 		189B969F1D40B3C800219B25 /* MYZMinePasscodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMinePasscodeController.h; sourceTree = "<group>"; };
 		189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMinePasscodeController.m; sourceTree = "<group>"; };
+		18AE364D1D53415B0024ECB3 /* MYZMineGestureSetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineGestureSetController.h; sourceTree = "<group>"; };
+		18AE364E1D53415B0024ECB3 /* MYZMineGestureSetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineGestureSetController.m; sourceTree = "<group>"; };
+		18AE36501D5345E70024ECB3 /* MYZGestureShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZGestureShapeView.h; sourceTree = "<group>"; };
+		18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZGestureShapeView.m; sourceTree = "<group>"; };
 		18D50A861D265D9C001AB2FB /* PasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D50A8A1D265D9C001AB2FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D50A8C1D265D9C001AB2FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +160,8 @@
 				189B969A1D40B0FC00219B25 /* MYZMineLockTypeController.m */,
 				189B969C1D40B3B400219B25 /* MYZMineGestureController.h */,
 				189B969D1D40B3B400219B25 /* MYZMineGestureController.m */,
+				18AE364D1D53415B0024ECB3 /* MYZMineGestureSetController.h */,
+				18AE364E1D53415B0024ECB3 /* MYZMineGestureSetController.m */,
 				189B969F1D40B3C800219B25 /* MYZMinePasscodeController.h */,
 				189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */,
 			);
@@ -184,6 +192,8 @@
 				DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */,
 				18810F441D3F73AA003058BA /* MYZSettingCell.h */,
 				18810F451D3F73AA003058BA /* MYZSettingCell.m */,
+				18AE36501D5345E70024ECB3 /* MYZGestureShapeView.h */,
+				18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */,
+				18AE36521D5345E70024ECB3 /* MYZGestureShapeView.m in Sources */,
 				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
 				DA8426D91D4F859900FBD962 /* MYZCircleView.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
@@ -342,6 +353,7 @@
 				DA650C071D4A47F6000818C5 /* MYZGestureView.m in Sources */,
 				18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */,
 				18810F2D1D3F68BC003058BA /* MYZMineController.m in Sources */,
+				18AE364F1D53415B0024ECB3 /* MYZMineGestureSetController.m in Sources */,
 				18D50A8B1D265D9C001AB2FB /* main.m in Sources */,
 				18810F251D3F61A7003058BA /* MYZHomeController.m in Sources */,
 				18810F461D3F73AA003058BA /* MYZSettingCell.m in Sources */,

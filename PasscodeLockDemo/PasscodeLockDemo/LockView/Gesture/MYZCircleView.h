@@ -9,14 +9,20 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    CircleViewStatusNormal,
-    CircleViewStatusSelected,
-    CircleViewStatusError,
-} CircleViewStatus;
+    GestureViewStatusNormal,
+    GestureViewStatusSelected,
+    GestureViewStatusError,
+} GestureViewStatus;
+
+
+#define CircleNormalColor [UIColor whiteColor];
+#define CircleSelectedColor [UIColor blueColor];
+#define CircleErrorColor [UIColor redColor];
+
 
 @interface MYZCircleView : UIView
 
-@property (nonatomic, assign) CircleViewStatus circleStatus;
+@property (nonatomic, assign) GestureViewStatus circleStatus;
 
 
 @end

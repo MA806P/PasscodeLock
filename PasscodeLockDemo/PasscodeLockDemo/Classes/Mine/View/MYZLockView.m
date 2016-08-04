@@ -37,10 +37,16 @@
     
     if (showGestureViewBool)
     {
-        //__weak typeof(self) weakSelf = self;
+        __weak typeof(self) weakSelf = self;
         MYZGestureView * gestureView = [[MYZGestureView alloc] init];
         gestureView.gestureResult = ^(NSString * gestureCode){
             NSLog(@" MYZLockView -- %@", gestureCode);
+            
+            if ([gestureCode isEqualToString:@"123"])
+            {
+                [weakSelf closse];
+            }
+            
         };
         [self addSubview:gestureView];
         self.gestureView = gestureView;

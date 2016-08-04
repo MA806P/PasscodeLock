@@ -10,11 +10,16 @@
 #import "MYZCircleView.h"
 
 
-
+//圆圈九宫格边界大小
 CGFloat const CircleViewMarginBorder = 5.0f;
 CGFloat const CircleViewMarginNear = 30.0f;
-
+//圆圈视图tag初始值
 NSInteger const CircleViewBaseTag = 100;
+
+//连线的宽度
+CGFloat const LineWidth = 6.0f;
+
+
 
 
 @interface MYZGestureView ()
@@ -23,9 +28,8 @@ NSInteger const CircleViewBaseTag = 100;
 
 @property (nonatomic, assign) CGPoint currentTouchPoint;
 
-//@property (nonatomic, copy) void(^success)(NSString * gestureCode);
-//@property (nonatomic, copy) void(^failure)(NSString * erroMessage);
-
+@property (nonatomic, assign) GestureViewStatus gestureViewStatus;
+@property (nonatomic, strong) UIColor * lineColor;
 
 @end
 
@@ -33,14 +37,6 @@ NSInteger const CircleViewBaseTag = 100;
 @implementation MYZGestureView
 
 
-- (NSMutableArray *)selectCircleArray
-{
-    if (_selectCircleArray == nil)
-    {
-        _selectCircleArray = [NSMutableArray array];
-    }
-    return _selectCircleArray;
-}
 
 
 #pragma mark - initializer
@@ -92,6 +88,37 @@ NSInteger const CircleViewBaseTag = 100;
     
 }
 
+#pragma mark - setter getter
+
+
+- (NSMutableArray *)selectCircleArray
+{
+    if (_selectCircleArray == nil)
+    {
+        _selectCircleArray = [NSMutableArray array];
+    }
+    return _selectCircleArray;
+}
+
+- (void)setGestureViewStatus:(GestureViewStatus)gestureViewStatus
+{
+    _gestureViewStatus = gestureViewStatus;
+    
+    if (_gestureViewStatus == GestureViewStatusNormal)
+    {
+        self.lineColor = CircleNormalColor;
+    }
+    else if (_gestureViewStatus == GestureViewStatusSelected)
+    {
+        self.lineColor = CircleSelectedColor;
+    }
+    else if (_gestureViewStatus == GestureViewStatusError)
+    {
+        self.lineColor = CircleErrorColor;
+    }
+
+    
+}
 
 #pragma mark - draw view
 
@@ -131,9 +158,8 @@ NSInteger const CircleViewBaseTag = 100;
     }
     
     CGContextSetLineCap(cr, kCGLineCapRound);
-    CGContextSetLineWidth(cr, 6);
-    [[UIColor whiteColor] set];
-    //渲染
+    CGContextSetLineWidth(cr, LineWidth);
+    [self.lineColor set];
     CGContextStrokePath(cr);
     
 }
@@ -160,7 +186,7 @@ NSInteger const CircleViewBaseTag = 100;
     for (MYZCircleView * circleView in self.selectCircleArray)
     {
         [gestureCode appendFormat:@"%ld",circleView.tag - CircleViewBaseTag];
-        circleView.circleStatus = CircleViewStatusNormal;
+        circleView.circleStatus = GestureViewStatusNormal;
     }
     
     
@@ -189,7 +215,8 @@ NSInteger const CircleViewBaseTag = 100;
         
         if(CGRectContainsPoint(circleView.frame, point) && ![self.selectCircleArray containsObject:circleView])
         {
-            circleView.circleStatus = CircleViewStatusSelected;
+            circleView.circleStatus = GestureViewStatusSelected;
+            self.gestureViewStatus = GestureViewStatusSelected;
             [self.selectCircleArray addObject:circleView];
             break;
         }
