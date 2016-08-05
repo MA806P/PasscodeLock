@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) MYZGestureView * gestureView;
 
+@property (nonatomic, copy) NSString * firstGestureCode;
+
 @end
 
 @implementation MYZMineGestureSetController
@@ -26,6 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回了" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+    
     
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     CGFloat marginTop = 100;
@@ -55,9 +62,37 @@
     gestureView.gestureResult = ^(NSString * gestureCode){
         NSLog(@" MYZMineGestureSetController -- %@", gestureCode);
         
-        if (weakSelf.gestureSetType == GestureSetTypeInstall)
+        if (weakSelf.gestureSetType == GestureSetTypeInstall && gestureCode.length > 3)
         {
             weakSelf.shapeView.gestureCode = gestureCode;
+            
+            if (self.firstGestureCode == nil)
+            {
+                self.firstGestureCode = gestureCode;
+                weakSelf.infoLabel.text = @"再次绘制解锁图案";
+            }
+            else if ([self.firstGestureCode isEqualToString:gestureCode])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:gestureCode forKey:GestureCodeKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                if (weakSelf.lockBlock)
+                {
+                    weakSelf.lockBlock(YES);
+                }
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                weakSelf.infoLabel.text = @"前后设置不一致";
+            }
+        }
+        else if (weakSelf.gestureSetType == GestureSetTypeInstall && self.firstGestureCode != nil)
+        {
+            weakSelf.infoLabel.text = @"前后设置不一致";
+        }
+        else if (weakSelf.gestureSetType == GestureSetTypeInstall && gestureCode.length < 4)
+        {
+            weakSelf.infoLabel.text = @"连接至少4个点，请重新设置";
         }
         
     };
@@ -67,8 +102,14 @@
 
 
 
-
-
+- (void)back
+{
+    if (self.lockBlock)
+    {
+        self.lockBlock(NO);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 
 

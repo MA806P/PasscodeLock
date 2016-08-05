@@ -10,6 +10,8 @@
 
 FOUNDATION_EXPORT NSString * const GestureText;
 FOUNDATION_EXPORT NSString * const GestureRaceText;
+FOUNDATION_EXPORT NSString * const PasscodeText;
+
 
 
 @interface MYZMineGestureController : MYZMineBaseController

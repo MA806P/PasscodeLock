@@ -40,9 +40,11 @@
         __weak typeof(self) weakSelf = self;
         MYZGestureView * gestureView = [[MYZGestureView alloc] init];
         gestureView.gestureResult = ^(NSString * gestureCode){
-            NSLog(@" MYZLockView -- %@", gestureCode);
             
-            if ([gestureCode isEqualToString:@"123"])
+            
+            NSString * saveGestureCode = [[NSUserDefaults standardUserDefaults] objectForKey:GestureCodeKey];
+            NSLog(@" MYZLockView -- %@ == old %@", gestureCode, saveGestureCode);
+            if ([gestureCode isEqualToString:saveGestureCode])
             {
                 [weakSelf closse];
             }

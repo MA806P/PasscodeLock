@@ -67,34 +67,49 @@
     {
         
         BOOL gestureLocked = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
+        __weak typeof(self) weakSelf = self;
         
         if (gestureLocked)
         {
+            MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
+            nvc.locked = item.isSwitchOn;
+            nvc.lockBlock = ^(BOOL locked){
+                [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
+                
+                if (locked && !item.isSwitchOn)
+                {
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GestureRaceText];
+                }
+                else if (!locked && item.isSwitchOn)
+                {
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GestureRaceText];
+                }
+                [weakSelf resetDatasourceArray];
+                [weakSelf.tableView reloadData];
+            };
             
-        __weak typeof(self) weakSelf = self;
-        
-        MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
-        nvc.locked = item.isSwitchOn;
-        nvc.lockBlock = ^(BOOL locked){
-            [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
-            
-            if (locked && !item.isSwitchOn)
-            {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GestureRaceText];
-            }
-            else if (!locked && item.isSwitchOn)
-            {
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GestureRaceText];
-            }
-            [weakSelf resetDatasourceArray];
-            [weakSelf.tableView reloadData];
-        };
-        
-        [self presentViewController:nvc animated:YES completion:nil];
+            [self presentViewController:nvc animated:YES completion:nil];
         }
         else
         {
+            BOOL passcodeLocked = [[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText];
+            if (passcodeLocked)
+            {
+                [self.tableView reloadData];
+                return;
+            }
+            
             MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+            gestureSetVC.lockBlock = ^(BOOL locked){
+                [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
+                
+                if (locked && !item.isSwitchOn)
+                {
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GestureRaceText];
+                }
+                [weakSelf resetDatasourceArray];
+                [weakSelf.tableView reloadData];
+            };
             [self.navigationController pushViewController:gestureSetVC animated:YES];
         }
         

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT NSString * const GestureCodeKey;
+
 @interface MYZLockView : UIScrollView
 
 @property (nonatomic, assign) BOOL showPasscodeViewBool;

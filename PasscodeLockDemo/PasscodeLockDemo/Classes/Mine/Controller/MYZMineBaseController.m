@@ -16,6 +16,7 @@ NSString * const PasscodeText = @"密码";
 NSString * const TouchIDText = @"Touch ID";
 NSString * const RemindTouchID = @"启动时提示使用Touch ID";
 
+NSString * const GestureCodeKey = @"GestureCodeKey";
 
 
 @interface MYZMineBaseController () <MYZSettingCellDelegate>
