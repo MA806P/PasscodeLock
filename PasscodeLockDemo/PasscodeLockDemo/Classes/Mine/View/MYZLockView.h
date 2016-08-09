@@ -10,7 +10,7 @@
 
 FOUNDATION_EXPORT NSString * const GestureCodeKey;
 
-@interface MYZLockView : UIScrollView
+@interface MYZLockView : UIView
 
 @property (nonatomic, assign) BOOL showPasscodeViewBool;
 

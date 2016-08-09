@@ -25,7 +25,6 @@
     if (self = [super initWithFrame:frame])
     {
         self.backgroundColor =[UIColor colorWithWhite:0.667 alpha:1.0];
-        self.showsHorizontalScrollIndicator = NO;
     }
     return self;
 }
@@ -78,30 +77,16 @@
 {
     [super layoutSubviews];
     
-    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
-    
-    CGFloat pages = (self.showGestureViewBool?1:0) + (self.showPasscodeViewBool?1:0);
-    
-    self.contentSize = CGSizeMake(screenW*pages, screenH);
-    self.pagingEnabled = YES;
-    
+    //CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    //CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
     if (self.showGestureViewBool)
     {
         self.gestureView.frame = CGRectMake(20, 20, 280, 280);
     }
-    
-    if (self.showPasscodeViewBool)
+    else if (self.showPasscodeViewBool)
     {
-        if (self.showGestureViewBool)
-        {
-            self.passcodeView.frame = CGRectMake(screenW+10, 10, 100, 100);
-        }
-        else
-        {
-            self.passcodeView.frame = CGRectMake(10, 10, 100, 100);
-        }
+        self.passcodeView.frame = CGRectMake(10, 10, 100, 100);
     }
     
 }
