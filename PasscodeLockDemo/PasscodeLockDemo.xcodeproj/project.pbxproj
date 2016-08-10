@@ -29,6 +29,7 @@
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
 		18D50A991D265D9C001AB2FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A971D265D9C001AB2FB /* LaunchScreen.storyboard */; };
+		DA55AA971D5B5C22007A2DD2 /* CALayer+shake.m in Sources */ = {isa = PBXBuildFile; fileRef = DA55AA961D5B5C22007A2DD2 /* CALayer+shake.m */; };
 		DA650C071D4A47F6000818C5 /* MYZGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA650C061D4A47F6000818C5 /* MYZGestureView.m */; };
 		DA650C0A1D4A4804000818C5 /* MYZPasscodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA650C091D4A4804000818C5 /* MYZPasscodeView.m */; };
 		DA8426D91D4F859900FBD962 /* MYZCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8426D81D4F859900FBD962 /* MYZCircleView.m */; };
@@ -78,6 +79,8 @@
 		18D50A951D265D9C001AB2FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D50A981D265D9C001AB2FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18D50A9A1D265D9C001AB2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA55AA951D5B5C22007A2DD2 /* CALayer+shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+shake.h"; sourceTree = "<group>"; };
+		DA55AA961D5B5C22007A2DD2 /* CALayer+shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+shake.m"; sourceTree = "<group>"; };
 		DA650C051D4A47F6000818C5 /* MYZGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZGestureView.h; sourceTree = "<group>"; };
 		DA650C061D4A47F6000818C5 /* MYZGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZGestureView.m; sourceTree = "<group>"; };
 		DA650C081D4A4804000818C5 /* MYZPasscodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZPasscodeView.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 			children = (
 				18810F211D3F61A7003058BA /* MYZNextViewController.h */,
 				18810F221D3F61A7003058BA /* MYZNextViewController.m */,
+				DA55AA951D5B5C22007A2DD2 /* CALayer+shake.h */,
+				DA55AA961D5B5C22007A2DD2 /* CALayer+shake.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				18810F401D3F6BCB003058BA /* MYZSettingCheckItem.m in Sources */,
 				189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */,
 				18810F241D3F61A7003058BA /* MYZTabBarController.m in Sources */,
+				DA55AA971D5B5C22007A2DD2 /* CALayer+shake.m in Sources */,
 				189B969B1D40B0FC00219B25 /* MYZMineLockTypeController.m in Sources */,
 				DA650C0A1D4A4804000818C5 /* MYZPasscodeView.m in Sources */,
 				DA650C071D4A47F6000818C5 /* MYZGestureView.m in Sources */,

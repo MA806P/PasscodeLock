@@ -46,8 +46,12 @@
             if ([gestureCode isEqualToString:saveGestureCode])
             {
                 [weakSelf closse];
+                return YES;
             }
-            
+            else
+            {
+                return NO;
+            }
         };
         [self addSubview:gestureView];
         self.gestureView = gestureView;

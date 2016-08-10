@@ -152,10 +152,15 @@ CGFloat const LineWidth = 6.0f;
         }
     }
     
-    if (self.selectCircleArray.count > 0)
-    {
-        CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
-    }
+    
+    [self.selectCircleArray enumerateObjectsUsingBlock:^(MYZCircleView * circleView, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (circleView.circleStatus != GestureViewStatusError)
+        {
+            CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
+        }
+    }];
+    
+    
     
     CGContextSetLineCap(cr, kCGLineCapRound);
     CGContextSetLineWidth(cr, LineWidth);
@@ -169,6 +174,7 @@ CGFloat const LineWidth = 6.0f;
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    [self cleanViews];
     [self checkCircleViewTouch:touches];
 }
 
@@ -186,19 +192,48 @@ CGFloat const LineWidth = 6.0f;
     for (MYZCircleView * circleView in self.selectCircleArray)
     {
         [gestureCode appendFormat:@"%ld",circleView.tag - CircleViewBaseTag];
-        circleView.circleStatus = GestureViewStatusNormal;
+        //circleView.circleStatus = GestureViewStatusNormal;
     }
     
     
     if (gestureCode.length > 0 && self.gestureResult != nil)
     {
-        self.gestureResult(gestureCode);
+        BOOL successGesture = self.gestureResult(gestureCode);
+        if (successGesture)
+        {
+            [self cleanViews];
+        }
+        else
+        {
+            for (MYZCircleView * circleView in self.selectCircleArray)
+            {
+                circleView.circleStatus = GestureViewStatusError;
+                self.gestureViewStatus = GestureViewStatusError;
+                [self setNeedsDisplay];
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self cleanViews];
+            });
+        }
     }
     
+    
+    
+    
+}
+
+
+
+- (void)cleanViews
+{
+    for (MYZCircleView * circleView in self.selectCircleArray)
+    {
+        circleView.circleStatus = GestureViewStatusNormal;
+    }
     [self.selectCircleArray removeAllObjects];
     [self setNeedsDisplay];
 }
-
 
 
 

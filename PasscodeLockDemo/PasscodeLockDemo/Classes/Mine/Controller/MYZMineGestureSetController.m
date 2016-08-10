@@ -8,7 +8,9 @@
 
 #import "MYZMineGestureSetController.h"
 #import "MYZGestureView.h"
+#import "MYZCircleView.h"
 #import "MYZGestureShapeView.h"
+#import "CALayer+shake.h"
 
 @interface MYZMineGestureSetController ()
 
@@ -60,6 +62,8 @@
     MYZGestureView * gestureView = [[MYZGestureView alloc] initWithFrame:CGRectMake(gestureViewX, gestureViewY, gestureViewWH, gestureViewWH)];
     __weak typeof(self) weakSelf = self;
     gestureView.gestureResult = ^(NSString * gestureCode){
+        
+        
         NSLog(@" MYZMineGestureSetController -- %@", gestureCode);
         
         if (weakSelf.gestureSetType == GestureSetTypeInstall && gestureCode.length > 3)
@@ -70,6 +74,8 @@
             {
                 self.firstGestureCode = gestureCode;
                 weakSelf.infoLabel.text = @"再次绘制解锁图案";
+                weakSelf.infoLabel.textColor = CircleNormalColor;
+                return YES;
             }
             else if ([self.firstGestureCode isEqualToString:gestureCode])
             {
@@ -80,20 +86,28 @@
                     weakSelf.lockBlock(YES);
                 }
                 [weakSelf.navigationController popViewControllerAnimated:YES];
+                return YES;
             }
             else
             {
                 weakSelf.infoLabel.text = @"前后设置不一致";
+                weakSelf.infoLabel.textColor = CircleErrorColor;
+                [weakSelf.infoLabel.layer shake];
             }
         }
         else if (weakSelf.gestureSetType == GestureSetTypeInstall && self.firstGestureCode != nil)
         {
             weakSelf.infoLabel.text = @"前后设置不一致";
+            weakSelf.infoLabel.textColor = CircleErrorColor;
+            [weakSelf.infoLabel.layer shake];
         }
         else if (weakSelf.gestureSetType == GestureSetTypeInstall && gestureCode.length < 4)
         {
             weakSelf.infoLabel.text = @"连接至少4个点，请重新设置";
+            weakSelf.infoLabel.textColor = CircleErrorColor;
+            [weakSelf.infoLabel.layer shake];
         }
+        return NO;
         
     };
     [self.view addSubview:gestureView];

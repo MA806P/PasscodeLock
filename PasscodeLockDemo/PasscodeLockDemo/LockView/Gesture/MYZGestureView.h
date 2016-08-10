@@ -10,7 +10,7 @@
 
 @interface MYZGestureView : UIView
 
-@property (nonatomic, copy) void(^gestureResult)(NSString * gestureCode);
+@property (nonatomic, copy) BOOL(^gestureResult)(NSString * gestureCode);
 
 
 @end
