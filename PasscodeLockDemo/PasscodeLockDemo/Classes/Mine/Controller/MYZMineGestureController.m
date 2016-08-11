@@ -69,29 +69,30 @@
         BOOL gestureLocked = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
         __weak typeof(self) weakSelf = self;
         
+        //如果手势密码是开的，点击switch跳转验证寿司页面删除手势
         if (gestureLocked)
         {
-            MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
-            nvc.locked = item.isSwitchOn;
-            nvc.lockBlock = ^(BOOL locked){
+            MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+            gestureSetVC.gestureSetType = GestureSetTypeDelete;
+            gestureSetVC.lockBlock = ^(BOOL locked){
                 [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
                 
-                if (locked && !item.isSwitchOn)
-                {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GestureRaceText];
-                }
-                else if (!locked && item.isSwitchOn)
+                //关闭手势密码
+                if (!locked && item.isSwitchOn)
                 {
                     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GestureRaceText];
                 }
                 [weakSelf resetDatasourceArray];
                 [weakSelf.tableView reloadData];
             };
+            [self.navigationController pushViewController:gestureSetVC animated:YES];
             
-            [self presentViewController:nvc animated:YES completion:nil];
+            
         }
+        //如果手势是关闭的，点击switch打开跳转设置手势页面
         else
         {
+            //先判断数字密码是否是开的，不能共存
             BOOL passcodeLocked = [[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText];
             if (passcodeLocked)
             {

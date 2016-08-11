@@ -10,7 +10,7 @@
 
 typedef enum: NSUInteger {
     GestureSetTypeInstall = 1,
-    GestureSetTypeVerify,
+    GestureSetTypeDelete,
     GestureSetTypeChange
     
 }GestureSetType;

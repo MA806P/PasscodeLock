@@ -7,6 +7,7 @@
 //
 
 #import "MYZMineGestureSetController.h"
+#import "MYZMineGestureController.h"
 #import "MYZGestureView.h"
 #import "MYZCircleView.h"
 #import "MYZGestureShapeView.h"
@@ -41,11 +42,11 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
-    NSLog(@" ---  %lu " , self.gestureSetType);
-    //设置默认值
+    
+    //设置默认值为修改密码的类型，因为点击修改是父类push过来的不方便设置type
     if (!self.gestureSetType)
     {
-        self.gestureSetType = GestureSetTypeVerify;
+        self.gestureSetType = GestureSetTypeChange;
     }
     
     
@@ -66,7 +67,7 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
         
         self.infoLabelDefaultText = SetLabelText;
     }
-    else if (self.gestureSetType == GestureSetTypeVerify)
+    else if (self.gestureSetType == GestureSetTypeDelete || self.gestureSetType == GestureSetTypeChange)
     {
         self.infoLabelDefaultText = @"请输入原手势密码";
     }
@@ -114,7 +115,15 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
                     {
                         weakSelf.lockBlock(YES);
                     }
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                    
+                    //返回
+                    for (UIViewController * vc in weakSelf.navigationController.viewControllers)
+                    {
+                        if ([vc isKindOfClass:[MYZMineGestureController class]])
+                        {
+                            [weakSelf.navigationController popToViewController:vc animated:YES];
+                        }
+                    }
                     return YES;
                 }
                 else
@@ -138,7 +147,50 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
             }
             return NO;
         }
-        
+        //修改手势密码，修改前先验证原密码
+        else if (weakSelf.gestureSetType == GestureSetTypeChange)
+        {
+            if ([weakSelf verifyGestureCodeWitCode:gestureCode])
+            {
+                MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+                gestureSetVC.gestureSetType = GestureSetTypeInstall;
+                [[NSUserDefaults standardUserDefaults] setObject:gestureCode forKey:GestureCodeKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [weakSelf.navigationController pushViewController:gestureSetVC animated:YES];
+                
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
+            
+            
+            
+        }
+        else if (weakSelf.gestureSetType == GestureSetTypeDelete)
+        {
+            if ([weakSelf verifyGestureCodeWitCode:gestureCode])
+            {
+                //密码验证成功，回调关闭你手势密码
+                if (weakSelf.lockBlock)
+                {
+                    weakSelf.lockBlock(NO);
+                }
+                
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:GestureCodeKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
+        }
         
         return NO;
         
@@ -147,6 +199,29 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
     
 }
 
+//验证密码
+- (BOOL)verifyGestureCodeWitCode:(NSString *) gestureCode
+{
+    NSString * saveGestureCode = [[NSUserDefaults standardUserDefaults] objectForKey:GestureCodeKey];
+    if ([gestureCode isEqualToString:saveGestureCode])
+    {
+        return YES;
+    }
+    else
+    {
+        [self infoLabelErrorMessage:@"密码错误"];
+        return NO;
+    }
+}
+
+//密码错误提示
+- (void)infoLabelErrorMessage:(NSString *)message
+{
+    __weak typeof(self) weakSelf = self;
+    weakSelf.infoLabel.text = message;
+    weakSelf.infoLabel.textColor = CircleErrorColor;
+    [weakSelf.infoLabel.layer shake];
+}
 
 //重置
 - (void)resetGesture
@@ -160,16 +235,36 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
 }
 
 
-//返回
+//导航栏返回按钮
 - (void)back
 {
-    if (self.lockBlock)
+    //设置手势密码，点击返回设置失败
+    if (self.gestureSetType == GestureSetTypeInstall && self.lockBlock)
     {
         self.lockBlock(NO);
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    //删除手势密码，点击返回删除失败
+    else if (self.gestureSetType == GestureSetTypeDelete && self.lockBlock)
+    {
+        //删除失败手势是锁上的
+        self.lockBlock(YES);
+    }
+    
+    [self popViewController];
+    
 }
 
+
+- (void)popViewController
+{
+    for (UIViewController * vc in self.navigationController.viewControllers)
+    {
+        if ([vc isKindOfClass:[MYZMineGestureController class]])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
+}
 
 
 
