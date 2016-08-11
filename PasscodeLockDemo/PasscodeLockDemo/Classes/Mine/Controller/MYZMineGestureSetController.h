@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum: NSUInteger {
-    GestureSetTypeInstall,
-    GestureSetTypeVerify
+    GestureSetTypeInstall = 1,
+    GestureSetTypeVerify,
+    GestureSetTypeChange
     
 }GestureSetType;
 

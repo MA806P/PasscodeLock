@@ -42,7 +42,7 @@
         MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
         group1.items = @[item1, item2];
         
-        MYZSettingPushItem * item3 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改手势密码" andNextClass:[UIViewController class]];
+        MYZSettingPushItem * item3 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改手势密码" andNextClass:[MYZMineGestureSetController class]];
         MYZSettingGroup * group2 = [[MYZSettingGroup alloc] init];
         group2.items = @[item3];
         
@@ -100,6 +100,7 @@
             }
             
             MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+            gestureSetVC.gestureSetType = GestureSetTypeInstall;
             gestureSetVC.lockBlock = ^(BOOL locked){
                 [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
                 
