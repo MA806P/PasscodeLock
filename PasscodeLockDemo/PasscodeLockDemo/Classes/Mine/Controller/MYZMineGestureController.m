@@ -37,8 +37,8 @@
     
     if (isSwitchOn)
     {
-        MYZSettingSwitchItem * item2 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:GestureRaceText];
-        item2.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:GestureRaceText];
+        MYZSettingSwitchItem * item2 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:GesturePathText];
+        item2.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:GesturePathText];
         MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
         group1.items = @[item1, item2];
         
@@ -80,7 +80,7 @@
                 //关闭手势密码
                 if (!locked && item.isSwitchOn)
                 {
-                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GestureRaceText];
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GesturePathText];
                 }
                 [weakSelf resetDatasourceArray];
                 [weakSelf.tableView reloadData];
@@ -107,7 +107,7 @@
                 
                 if (locked && !item.isSwitchOn)
                 {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GestureRaceText];
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GesturePathText];
                 }
                 [weakSelf resetDatasourceArray];
                 [weakSelf.tableView reloadData];
@@ -116,11 +116,11 @@
         }
         
     }
-    else if([item.labelText isEqualToString:GestureRaceText])
+    else if([item.labelText isEqualToString:GesturePathText])
     {
         item.switchOn = !item.isSwitchOn;
         NSLog(@" 显示手势轨迹 %d ",item.isSwitchOn);
-        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:GestureRaceText];
+        [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:GesturePathText];
     }
     
 }

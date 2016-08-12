@@ -124,6 +124,8 @@ CGFloat const LineWidth = 6.0f;
 
 - (void)drawRect:(CGRect)rect
 {
+    if (self.isHideGesturePath) {  return;  }
+    
     self.clearsContextBeforeDrawing = YES;
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
@@ -205,12 +207,16 @@ CGFloat const LineWidth = 6.0f;
         }
         else
         {
-            for (MYZCircleView * circleView in self.selectCircleArray)
+            if (!self.isHideGesturePath)
             {
-                circleView.circleStatus = GestureViewStatusError;
-                self.gestureViewStatus = GestureViewStatusError;
-                [self setNeedsDisplay];
+                for (MYZCircleView * circleView in self.selectCircleArray)
+                {
+                    circleView.circleStatus = GestureViewStatusError;
+                    self.gestureViewStatus = GestureViewStatusError;
+                    [self setNeedsDisplay];
+                }
             }
+            
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self cleanViews];
@@ -250,8 +256,12 @@ CGFloat const LineWidth = 6.0f;
         
         if(CGRectContainsPoint(circleView.frame, point) && ![self.selectCircleArray containsObject:circleView])
         {
-            circleView.circleStatus = GestureViewStatusSelected;
-            self.gestureViewStatus = GestureViewStatusSelected;
+            if (!self.isHideGesturePath)
+            {
+                circleView.circleStatus = GestureViewStatusSelected;
+                self.gestureViewStatus = GestureViewStatusSelected;
+            }
+            
             [self.selectCircleArray addObject:circleView];
             break;
         }

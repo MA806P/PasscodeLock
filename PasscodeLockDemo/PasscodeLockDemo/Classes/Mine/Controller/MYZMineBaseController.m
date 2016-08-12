@@ -10,7 +10,7 @@
 #import "MYZSettingCell.h"
 
 NSString * const GestureText = @"手势密码";
-NSString * const GestureRaceText = @"显示手势轨迹";
+NSString * const GesturePathText = @"显示手势轨迹";
 
 NSString * const PasscodeText = @"密码";
 NSString * const TouchIDText = @"Touch ID";

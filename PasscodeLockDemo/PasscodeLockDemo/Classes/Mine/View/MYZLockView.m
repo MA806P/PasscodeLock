@@ -38,8 +38,8 @@
     {
         __weak typeof(self) weakSelf = self;
         MYZGestureView * gestureView = [[MYZGestureView alloc] init];
+        gestureView.hideGesturePath = ![[NSUserDefaults standardUserDefaults] boolForKey:GesturePathText];
         gestureView.gestureResult = ^(NSString * gestureCode){
-            
             
             NSString * saveGestureCode = [[NSUserDefaults standardUserDefaults] objectForKey:GestureCodeKey];
             NSLog(@" MYZLockView -- %@ == old %@", gestureCode, saveGestureCode);

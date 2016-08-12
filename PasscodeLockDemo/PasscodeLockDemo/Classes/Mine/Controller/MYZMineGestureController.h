@@ -9,7 +9,7 @@
 #import "MYZMineBaseController.h"
 
 FOUNDATION_EXPORT NSString * const GestureText;
-FOUNDATION_EXPORT NSString * const GestureRaceText;
+FOUNDATION_EXPORT NSString * const GesturePathText;
 FOUNDATION_EXPORT NSString * const PasscodeText;
 
 

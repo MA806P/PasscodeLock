@@ -12,5 +12,6 @@
 
 @property (nonatomic, copy) BOOL(^gestureResult)(NSString * gestureCode);
 
+@property (nonatomic, getter=isHideGesturePath) BOOL hideGesturePath;
 
 @end
