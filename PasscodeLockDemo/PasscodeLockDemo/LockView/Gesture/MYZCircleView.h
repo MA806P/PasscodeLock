@@ -11,6 +11,7 @@
 typedef enum : NSUInteger {
     GestureViewStatusNormal,
     GestureViewStatusSelected,
+    GestureViewStatusSelectedAndShowArrow,
     GestureViewStatusError,
 } GestureViewStatus;
 
@@ -24,5 +25,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) GestureViewStatus circleStatus;
 
+/** 相邻两圆圈连线的方向角度 */
+@property (nonatomic) CGFloat angle;
 
 @end

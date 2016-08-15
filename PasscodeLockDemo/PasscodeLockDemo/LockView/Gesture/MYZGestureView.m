@@ -260,6 +260,24 @@ CGFloat const LineWidth = 6.0f;
             {
                 circleView.circleStatus = GestureViewStatusSelected;
                 self.gestureViewStatus = GestureViewStatusSelected;
+                
+                //计算最后两个选中圆圈的角度，为了画出指示箭头
+                if (self.selectCircleArray.count > 0)
+                {
+                    MYZCircleView * lastSelectCircleView = [self.selectCircleArray lastObject];
+                    
+                    CGFloat x1 = circleView.center.x;
+                    CGFloat y1 = circleView.center.y;
+                    CGFloat x2 = lastSelectCircleView.center.x;
+                    CGFloat y2 = lastSelectCircleView.center.y;
+                    
+                    CGFloat angle = atan2(y1 - y2, x1 - x2) + M_PI_2;
+                    lastSelectCircleView.angle = angle;
+                    lastSelectCircleView.circleStatus = GestureViewStatusSelectedAndShowArrow;
+
+                }
+                
+                
             }
             
             [self.selectCircleArray addObject:circleView];

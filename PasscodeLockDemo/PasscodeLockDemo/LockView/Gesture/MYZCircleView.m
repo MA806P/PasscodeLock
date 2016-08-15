@@ -13,6 +13,8 @@
 CGFloat const circleBorderWidth = 1.0f;
 //内部的实心圆所占外圆的比例大小
 CGFloat const circleRatio = 0.4f;
+//三角形箭头的边长
+CGFloat const arrowH = 10.0;
 
 
 
@@ -42,6 +44,7 @@ CGFloat const circleRatio = 0.4f;
     CGContextRef cr = UIGraphicsGetCurrentContext();
     CGContextClearRect(cr, rect);
     
+    //画外圆圈
     CGFloat circleDiameter = MIN(rect.size.width, rect.size.height) - circleBorderWidth * 2.0;
     CGRect circleInRect = CGRectMake(circleBorderWidth, circleBorderWidth, circleDiameter, circleDiameter);
     CGContextAddEllipseInRect(cr, circleInRect);
@@ -49,7 +52,7 @@ CGFloat const circleRatio = 0.4f;
     [self.circleColor set];
     CGContextStrokePath(cr);
     
-    
+    //画内实心圆
     if (self.circleStatus != GestureViewStatusNormal)
     {
         CGFloat filledCircleDiameter = circleDiameter * circleRatio;
@@ -58,7 +61,27 @@ CGFloat const circleRatio = 0.4f;
         CGContextAddEllipseInRect(cr, CGRectMake(filledCircleX, filledCircleY, filledCircleDiameter, filledCircleDiameter));
         [self.circleColor set];
         CGContextFillPath(cr);
+        
+        
+        //画指示方向三角箭头
+        if (self.circleStatus == GestureViewStatusSelectedAndShowArrow)
+        {
+            CGContextTranslateCTM(cr, circleDiameter, circleDiameter);
+            CGContextRotateCTM(cr, self.angle);
+            CGContextTranslateCTM(cr, -circleDiameter, -circleDiameter);
+            
+            CGFloat arrowMargin = circleDiameter * (1-circleRatio) * 0.5;
+            CGContextMoveToPoint(cr, (rect.size.width - arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
+            CGContextAddLineToPoint(cr, (rect.size.width + arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
+            CGContextAddLineToPoint(cr, rect.size.width * 0.5 , filledCircleY - arrowMargin - arrowH);
+            CGContextClosePath(cr);
+            CGContextSetFillColorWithColor(cr, self.circleColor.CGColor);
+            CGContextFillPath(cr);
+            
+        }
+        
     }
+    
     
     
 }
@@ -72,7 +95,7 @@ CGFloat const circleRatio = 0.4f;
     {
         self.circleColor = CircleNormalColor;
     }
-    else if (_circleStatus == GestureViewStatusSelected)
+    else if (_circleStatus == GestureViewStatusSelected || _circleStatus == GestureViewStatusSelectedAndShowArrow)
     {
         self.circleColor = CircleSelectedColor;
     }
@@ -81,8 +104,18 @@ CGFloat const circleRatio = 0.4f;
         self.circleColor = CircleErrorColor;
     }
     
+    
     [self setNeedsDisplay];
 }
+
+
+
+//- (void)setAngle:(CGFloat)angle
+//{
+//    _angle = angle;
+//    
+//    [self setNeedsDisplay];
+//}
 
 
 
