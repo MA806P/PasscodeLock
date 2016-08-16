@@ -66,18 +66,19 @@ CGFloat const arrowH = 10.0;
         //画指示方向三角箭头
         if (self.circleStatus == GestureViewStatusSelectedAndShowArrow)
         {
-            CGContextTranslateCTM(cr, circleDiameter, circleDiameter);
+            //先平移到圆心然后在旋转然后在平移回来
+            CGFloat offset = MIN(rect.size.width, rect.size.height) * 0.5;
+            CGContextTranslateCTM(cr, offset, offset);
             CGContextRotateCTM(cr, self.angle);
-            CGContextTranslateCTM(cr, -circleDiameter, -circleDiameter);
+            CGContextTranslateCTM(cr, -offset, -offset);
             
-            CGFloat arrowMargin = circleDiameter * (1-circleRatio) * 0.5;
+            CGFloat arrowMargin = (filledCircleY - arrowH) * 0.5;
             CGContextMoveToPoint(cr, (rect.size.width - arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
             CGContextAddLineToPoint(cr, (rect.size.width + arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
             CGContextAddLineToPoint(cr, rect.size.width * 0.5 , filledCircleY - arrowMargin - arrowH);
             CGContextClosePath(cr);
             CGContextSetFillColorWithColor(cr, self.circleColor.CGColor);
             CGContextFillPath(cr);
-            
         }
         
     }
