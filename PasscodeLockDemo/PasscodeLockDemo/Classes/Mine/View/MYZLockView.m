@@ -83,6 +83,9 @@
         MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] init];
         [self addSubview:passcodeView];
         self.passcodeView = passcodeView;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
+        [passcodeView addGestureRecognizer:tap];
     }
     
 }
