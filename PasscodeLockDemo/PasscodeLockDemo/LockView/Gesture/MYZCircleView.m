@@ -64,7 +64,7 @@ CGFloat const arrowH = 10.0;
         
         
         //画指示方向三角箭头
-        if (self.circleStatus == GestureViewStatusSelectedAndShowArrow)
+        if (self.circleStatus == GestureViewStatusSelectedAndShowArrow || self.circleStatus == GestureViewStatusErrorAndShowArrow)
         {
             //先平移到圆心然后在旋转然后在平移回来
             CGFloat offset = MIN(rect.size.width, rect.size.height) * 0.5;
@@ -100,7 +100,7 @@ CGFloat const arrowH = 10.0;
     {
         self.circleColor = CircleSelectedColor;
     }
-    else if (_circleStatus == GestureViewStatusError)
+    else if (_circleStatus == GestureViewStatusError || _circleStatus == GestureViewStatusErrorAndShowArrow)
     {
         self.circleColor = CircleErrorColor;
     }

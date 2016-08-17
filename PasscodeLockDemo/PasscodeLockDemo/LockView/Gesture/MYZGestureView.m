@@ -70,6 +70,18 @@ CGFloat const LineWidth = 6.0f;
     
     //手势解锁视图的大小
     CGFloat squareWH = MIN(self.frame.size.width, self.frame.size.height);
+    CGFloat offsetY = 0.0;
+    CGFloat offsetX = 0.0;
+    if (self.frame.size.width >= self.frame.size.height)
+    {
+        offsetX = (self.frame.size.width - self.frame.size.height) * 0.5;
+    }
+    else
+    {
+        offsetY = (self.frame.size.height - self.frame.size.width) * 0.5;
+    }
+    
+    
     //小圆的大小
     CGFloat circleWH = (squareWH - (CircleViewMarginBorder+CircleViewMarginNear)*2.0)/3.0;
     
@@ -83,7 +95,7 @@ CGFloat const LineWidth = 6.0f;
         CGFloat circleX = CircleViewMarginBorder + (CircleViewMarginNear + circleWH) * currentColumn;
         CGFloat circleY = CircleViewMarginBorder + (CircleViewMarginNear + circleWH) * currentRow;
         
-        circleView.frame = CGRectMake(circleX, circleY, circleWH, circleWH);
+        circleView.frame = CGRectMake(circleX + offsetX, circleY + offsetY, circleWH, circleWH);
     }
     
 }
@@ -162,8 +174,6 @@ CGFloat const LineWidth = 6.0f;
         }
     }];
     
-    
-    
     CGContextSetLineCap(cr, kCGLineCapRound);
     CGContextSetLineWidth(cr, LineWidth);
     [self.lineColor set];
@@ -209,12 +219,16 @@ CGFloat const LineWidth = 6.0f;
         {
             if (!self.isHideGesturePath)
             {
-                for (MYZCircleView * circleView in self.selectCircleArray)
+                for (int i = 0; i < self.selectCircleArray.count; i++)
                 {
-                    circleView.circleStatus = GestureViewStatusError;
+                    MYZCircleView * circleView = self.selectCircleArray[i];
+                    BOOL showArrow = (self.isShowArrowDirection && i != self.selectCircleArray.count - 1);
+                    //判断是否显示指示方向的箭头, 最后一个不用显示
+                    circleView.circleStatus = showArrow ? GestureViewStatusErrorAndShowArrow : GestureViewStatusError;
                     self.gestureViewStatus = GestureViewStatusError;
                     [self setNeedsDisplay];
                 }
+                
             }
             
             
@@ -223,8 +237,6 @@ CGFloat const LineWidth = 6.0f;
             });
         }
     }
-    
-    
     
     
 }
@@ -262,7 +274,7 @@ CGFloat const LineWidth = 6.0f;
                 self.gestureViewStatus = GestureViewStatusSelected;
                 
                 //计算最后两个选中圆圈的角度，为了画出指示箭头
-                if (self.selectCircleArray.count > 0)
+                if (self.selectCircleArray.count > 0 && self.isShowArrowDirection)
                 {
                     MYZCircleView * lastSelectCircleView = [self.selectCircleArray lastObject];
                     
@@ -274,9 +286,7 @@ CGFloat const LineWidth = 6.0f;
                     CGFloat angle = atan2(y1 - y2, x1 - x2) + M_PI_2;
                     lastSelectCircleView.angle = angle;
                     lastSelectCircleView.circleStatus = GestureViewStatusSelectedAndShowArrow;
-
                 }
-                
                 
             }
             

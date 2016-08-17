@@ -12,6 +12,8 @@
 
 @interface MYZLockView ()
 
+@property (nonatomic, weak) UIImageView * headImgView;
+
 @property (nonatomic, weak) MYZGestureView * gestureView;
 
 @property (nonatomic, weak) MYZPasscodeView * passcodeView;
@@ -25,6 +27,18 @@
     if (self = [super initWithFrame:frame])
     {
         self.backgroundColor =[UIColor colorWithWhite:0.667 alpha:1.0];
+        
+        CGFloat headWH = 60.0;
+        CGFloat headY = 80.0;
+        CGFloat headX = ([UIScreen mainScreen].bounds.size.width - headWH) * 0.5;
+        
+        UIImageView * headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(headX, headY, headWH, headWH)];
+        headImgView.image = [UIImage imageNamed:@"head"];
+        headImgView.layer.cornerRadius = 30;
+        headImgView.layer.masksToBounds = YES;
+        [self addSubview:headImgView];
+        self.headImgView = headImgView;
+        
     }
     return self;
 }
@@ -84,9 +98,14 @@
     //CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     //CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
+    CGFloat lockViewW = 240;
+    CGFloat lockViewH = 280;
+    CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 20;
+    CGFloat lockViewX = ([UIScreen mainScreen].bounds.size.width - lockViewW) * 0.5;
+    
     if (self.showGestureViewBool)
     {
-        self.gestureView.frame = CGRectMake(20, 20, 280, 280);
+        self.gestureView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewH);
     }
     else if (self.showPasscodeViewBool)
     {

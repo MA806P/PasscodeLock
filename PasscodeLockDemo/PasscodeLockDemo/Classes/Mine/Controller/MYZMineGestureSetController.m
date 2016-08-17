@@ -84,8 +84,10 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
     CGFloat gestureViewWH = 260;
     CGFloat gestureViewX = (screenW - gestureViewWH) * 0.5;
     CGFloat gestureViewY = CGRectGetMaxY(self.infoLabel.frame) + 30;
-    MYZGestureView * gestureView = [[MYZGestureView alloc] initWithFrame:CGRectMake(gestureViewX, gestureViewY, gestureViewWH, gestureViewWH)];
     __weak typeof(self) weakSelf = self;
+    MYZGestureView * gestureView = [[MYZGestureView alloc] initWithFrame:CGRectMake(gestureViewX, gestureViewY, gestureViewWH, gestureViewWH)];
+    //是否显示指示手势划过的方向箭头, 在初始设置手势密码的时候才显示, 其他的不用显示
+    gestureView.showArrowDirection = self.gestureSetType == GestureSetTypeInstall ? YES : NO;
     gestureView.gestureResult = ^(NSString * gestureCode){
         
         //NSLog(@" MYZMineGestureSetController -- %@", gestureCode);

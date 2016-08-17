@@ -13,6 +13,7 @@ typedef enum : NSUInteger {
     GestureViewStatusSelected,
     GestureViewStatusSelectedAndShowArrow,
     GestureViewStatusError,
+    GestureViewStatusErrorAndShowArrow,
 } GestureViewStatus;
 
 
