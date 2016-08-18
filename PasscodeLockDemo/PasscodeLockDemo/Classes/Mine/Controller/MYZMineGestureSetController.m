@@ -51,14 +51,14 @@ NSString * const SetLabelErrorText = @"前后设置不一致";
     
     
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat marginTop = 100;
+    CGFloat marginTop = 0.2 * ([UIScreen mainScreen].bounds.size.height);
     if (self.gestureSetType == GestureSetTypeInstall)
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(resetGesture)];
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
      
         //手势缩略图
-        CGFloat shapeWH = 40;
+        CGFloat shapeWH = 38.0;
         CGFloat shapX = (screenW - shapeWH)*0.5;
         MYZGestureShapeView * shapeView = [[MYZGestureShapeView alloc] initWithFrame:CGRectMake(shapX, marginTop, shapeWH, shapeWH)];
         shapeView.backgroundColor = [UIColor clearColor];

@@ -17,7 +17,7 @@ CGFloat const CircleViewMarginNear = 30.0f;
 NSInteger const CircleViewBaseTag = 100;
 
 //连线的宽度
-CGFloat const LineWidth = 6.0f;
+CGFloat const LineWidth = 4.0f;
 
 
 
@@ -168,7 +168,7 @@ CGFloat const LineWidth = 6.0f;
     
     
     [self.selectCircleArray enumerateObjectsUsingBlock:^(MYZCircleView * circleView, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (circleView.circleStatus != GestureViewStatusError)
+        if (circleView.circleStatus != GestureViewStatusError && circleView.circleStatus != GestureViewStatusErrorAndShowArrow)
         {
             CGContextAddLineToPoint(cr, self.currentTouchPoint.x, self.currentTouchPoint.y);
         }

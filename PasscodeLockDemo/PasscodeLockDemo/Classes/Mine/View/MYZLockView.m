@@ -28,13 +28,13 @@
     {
         self.backgroundColor =[UIColor colorWithWhite:0.667 alpha:1.0];
         
-        CGFloat headWH = 60.0;
-        CGFloat headY = 80.0;
+        CGFloat headWH = 70.0;
+        CGFloat headY = 0.14 * ([UIScreen mainScreen].bounds.size.height);
         CGFloat headX = ([UIScreen mainScreen].bounds.size.width - headWH) * 0.5;
         
         UIImageView * headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(headX, headY, headWH, headWH)];
         headImgView.image = [UIImage imageNamed:@"head"];
-        headImgView.layer.cornerRadius = 30;
+        headImgView.layer.cornerRadius = headWH * 0.5;
         headImgView.layer.masksToBounds = YES;
         [self addSubview:headImgView];
         self.headImgView = headImgView;
@@ -101,9 +101,9 @@
     //CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     //CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
-    CGFloat lockViewW = 240;
+    CGFloat lockViewW = 280;
     CGFloat lockViewH = 280;
-    CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 20;
+    CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 40;
     CGFloat lockViewX = ([UIScreen mainScreen].bounds.size.width - lockViewW) * 0.5;
     
     if (self.showGestureViewBool)

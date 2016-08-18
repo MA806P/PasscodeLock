@@ -12,9 +12,9 @@
 //外空心圆边界宽度
 CGFloat const circleBorderWidth = 1.0f;
 //内部的实心圆所占外圆的比例大小
-CGFloat const circleRatio = 0.4f;
+CGFloat const circleRatio = 0.3f;
 //三角形箭头的边长
-CGFloat const arrowH = 10.0;
+CGFloat const arrowH = 8.0;
 
 
 
@@ -73,8 +73,8 @@ CGFloat const arrowH = 10.0;
             CGContextTranslateCTM(cr, -offset, -offset);
             
             CGFloat arrowMargin = (filledCircleY - arrowH) * 0.5;
-            CGContextMoveToPoint(cr, (rect.size.width - arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
-            CGContextAddLineToPoint(cr, (rect.size.width + arrowH*1.1547) * 0.5 , filledCircleY - arrowMargin);
+            CGContextMoveToPoint(cr, (rect.size.width - arrowH * 1.5) * 0.5 , filledCircleY - arrowMargin);
+            CGContextAddLineToPoint(cr, (rect.size.width + arrowH * 1.5) * 0.5 , filledCircleY - arrowMargin);
             CGContextAddLineToPoint(cr, rect.size.width * 0.5 , filledCircleY - arrowMargin - arrowH);
             CGContextClosePath(cr);
             CGContextSetFillColorWithColor(cr, self.circleColor.CGColor);

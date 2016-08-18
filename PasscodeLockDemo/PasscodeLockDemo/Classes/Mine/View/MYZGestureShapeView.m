@@ -39,8 +39,8 @@
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
     CGFloat squareWH = MIN(rect.size.width, rect.size.height);
-    CGFloat marginBorder = 2;
-    CGFloat marginNear = 2;
+    CGFloat marginBorder = 3.0;
+    CGFloat marginNear = 3.0;
     CGFloat circleWH = (squareWH - (marginBorder+marginNear)*2.0)/3.0;
     
     for (int i = 0; i < 9; i++)

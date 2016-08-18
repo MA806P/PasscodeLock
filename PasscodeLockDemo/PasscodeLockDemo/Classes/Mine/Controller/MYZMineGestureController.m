@@ -100,7 +100,7 @@
                 
                 UIAlertController * avc = [UIAlertController alertControllerWithTitle:nil message:@"继续开启手势解锁将关闭密码解锁" preferredStyle:UIAlertControllerStyleAlert];
                 [avc addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    [self.tableView reloadData];
+                    [weakSelf.tableView reloadData];
                 }]];
                 
                 [avc addAction:[UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -108,24 +108,16 @@
                     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:PasscodeText];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     
-                    MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
-                    gestureSetVC.gestureSetType = GestureSetTypeInstall;
-                    gestureSetVC.lockBlock = ^(BOOL locked){
-                        [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
-                        
-                        if (locked && !item.isSwitchOn)
-                        {
-                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GesturePathText];
-                        }
-                        [weakSelf resetDatasourceArray];
-                        [weakSelf.tableView reloadData];
-                    };
-                    [self.navigationController pushViewController:gestureSetVC animated:YES];
+                    //跳转手势设置页面
+                    [weakSelf pushToSetGestureWithItem:item];
                     
                 }]];
-                
-                [self presentViewController:avc animated:YES completion:nil];
-                
+                [weakSelf presentViewController:avc animated:YES completion:nil];
+            }
+            else
+            {
+                //跳转手势设置页面
+                [weakSelf pushToSetGestureWithItem:item];
             }
             
             
@@ -142,6 +134,24 @@
 }
 
 
+
+- (void)pushToSetGestureWithItem:(MYZSettingSwitchItem *)item
+{
+    MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];
+    gestureSetVC.gestureSetType = GestureSetTypeInstall;
+    gestureSetVC.lockBlock = ^(BOOL locked){
+        [[NSUserDefaults standardUserDefaults] setBool:locked forKey:GestureText];
+        
+        if (locked && !item.isSwitchOn)
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:GesturePathText];
+        }
+        [self resetDatasourceArray];
+        [self.tableView reloadData];
+    };
+    [self.navigationController pushViewController:gestureSetVC animated:YES];
+    
+}
 
 
 
