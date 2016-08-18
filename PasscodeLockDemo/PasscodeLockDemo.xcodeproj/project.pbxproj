@@ -24,7 +24,8 @@
 		189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B969D1D40B3B400219B25 /* MYZMineGestureController.m */; };
 		189B96A11D40B3C800219B25 /* MYZMinePasscodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */; };
 		18AE364F1D53415B0024ECB3 /* MYZMineGestureSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE364E1D53415B0024ECB3 /* MYZMineGestureSetController.m */; };
-		18AE36521D5345E70024ECB3 /* MYZGestureShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */; };
+		18BB78921D65B7BA003A738E /* MYZNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB78911D65B7BA003A738E /* MYZNumberView.m */; };
+		18BB78951D65B81F003A738E /* MYZGestureShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB78941D65B81F003A738E /* MYZGestureShapeView.m */; };
 		18D50A8B1D265D9C001AB2FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8A1D265D9C001AB2FB /* main.m */; };
 		18D50A8E1D265D9C001AB2FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D50A8D1D265D9C001AB2FB /* AppDelegate.m */; };
 		18D50A961D265D9C001AB2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D50A951D265D9C001AB2FB /* Assets.xcassets */; };
@@ -70,8 +71,10 @@
 		189B96A01D40B3C800219B25 /* MYZMinePasscodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMinePasscodeController.m; sourceTree = "<group>"; };
 		18AE364D1D53415B0024ECB3 /* MYZMineGestureSetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZMineGestureSetController.h; sourceTree = "<group>"; };
 		18AE364E1D53415B0024ECB3 /* MYZMineGestureSetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZMineGestureSetController.m; sourceTree = "<group>"; };
-		18AE36501D5345E70024ECB3 /* MYZGestureShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZGestureShapeView.h; sourceTree = "<group>"; };
-		18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZGestureShapeView.m; sourceTree = "<group>"; };
+		18BB78901D65B7B9003A738E /* MYZNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZNumberView.h; sourceTree = "<group>"; };
+		18BB78911D65B7BA003A738E /* MYZNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZNumberView.m; sourceTree = "<group>"; };
+		18BB78931D65B81F003A738E /* MYZGestureShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYZGestureShapeView.h; sourceTree = "<group>"; };
+		18BB78941D65B81F003A738E /* MYZGestureShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYZGestureShapeView.m; sourceTree = "<group>"; };
 		18D50A861D265D9C001AB2FB /* PasscodeLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasscodeLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D50A8A1D265D9C001AB2FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D50A8C1D265D9C001AB2FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -197,8 +200,6 @@
 				DAE30E111D48FEF900FEE2E7 /* MYZLockView.m */,
 				18810F441D3F73AA003058BA /* MYZSettingCell.h */,
 				18810F451D3F73AA003058BA /* MYZSettingCell.m */,
-				18AE36501D5345E70024ECB3 /* MYZGestureShapeView.h */,
-				18AE36511D5345E70024ECB3 /* MYZGestureShapeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +260,8 @@
 				DA650C061D4A47F6000818C5 /* MYZGestureView.m */,
 				DA8426D71D4F859900FBD962 /* MYZCircleView.h */,
 				DA8426D81D4F859900FBD962 /* MYZCircleView.m */,
+				18BB78931D65B81F003A738E /* MYZGestureShapeView.h */,
+				18BB78941D65B81F003A738E /* MYZGestureShapeView.m */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -268,6 +271,8 @@
 			children = (
 				DA650C081D4A4804000818C5 /* MYZPasscodeView.h */,
 				DA650C091D4A4804000818C5 /* MYZPasscodeView.m */,
+				18BB78901D65B7B9003A738E /* MYZNumberView.h */,
+				18BB78911D65B7BA003A738E /* MYZNumberView.m */,
 			);
 			path = Passcode;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				TargetAttributes = {
 					18D50A851D265D9C001AB2FB = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 3ZPEAN2426;
 					};
 				};
 			};
@@ -344,9 +350,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				18810F3D1D3F6BA0003058BA /* MYZSettingSwitchItem.m in Sources */,
-				18AE36521D5345E70024ECB3 /* MYZGestureShapeView.m in Sources */,
 				189B969E1D40B3B400219B25 /* MYZMineGestureController.m in Sources */,
 				DA8426D91D4F859900FBD962 /* MYZCircleView.m in Sources */,
+				18BB78951D65B81F003A738E /* MYZGestureShapeView.m in Sources */,
 				18810F3A1D3F6B56003058BA /* MYZSettingPushItem.m in Sources */,
 				18810F271D3F61A7003058BA /* MYZNextViewController.m in Sources */,
 				DAE30E121D48FEF900FEE2E7 /* MYZLockView.m in Sources */,
@@ -362,6 +368,7 @@
 				18AE364F1D53415B0024ECB3 /* MYZMineGestureSetController.m in Sources */,
 				18D50A8B1D265D9C001AB2FB /* main.m in Sources */,
 				18810F251D3F61A7003058BA /* MYZHomeController.m in Sources */,
+				18BB78921D65B7BA003A738E /* MYZNumberView.m in Sources */,
 				18810F461D3F73AA003058BA /* MYZSettingCell.m in Sources */,
 				18810F431D3F71ED003058BA /* MYZMineBaseController.m in Sources */,
 				18810F371D3F6A5E003058BA /* MYZSettingItem.m in Sources */,
@@ -470,9 +477,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myz.PasscodeLockDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.159Cai.08181100;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -481,9 +489,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myz.PasscodeLockDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.159Cai.08181100;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
