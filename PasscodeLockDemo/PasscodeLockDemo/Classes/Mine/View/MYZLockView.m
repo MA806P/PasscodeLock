@@ -94,6 +94,7 @@
 
 
 
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -106,13 +107,15 @@
     CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 40;
     CGFloat lockViewX = ([UIScreen mainScreen].bounds.size.width - lockViewW) * 0.5;
     
+    CGRect lockFrame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewH);
+    
     if (self.showGestureViewBool)
     {
-        self.gestureView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewH);
+        self.gestureView.frame = lockFrame;
     }
     else if (self.showPasscodeViewBool)
     {
-        self.passcodeView.frame = CGRectMake(10, 10, 100, 100);
+        self.passcodeView.frame = lockFrame;
     }
     
 }

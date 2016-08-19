@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+#define NumberViewColor [UIColor grayColor]
+
+
+typedef enum : NSUInteger {
+    
+    NumberViewStateNormal,
+    NumberViewStateHighlight,
+    
+} NumberViewState;
+
+
 @interface MYZNumberView : UIView
 
 @property (nonatomic, copy) NSString * numberText;
+
+@property (nonatomic) NumberViewState numberViewState;
 
 @end
