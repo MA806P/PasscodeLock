@@ -8,11 +8,18 @@
 
 #import "MYZPasscodeView.h"
 #import "MYZNumberView.h"
+#import "MYZPasscodeInfoView.h"
+#import "CALayer+shake.h"
+
+/** 设置密码几位数 */
+NSInteger const PasscodeCount = 4;
 
 NSInteger const NumberViewBaseTag = 77;
 
 
 @interface MYZPasscodeView ()
+
+@property (nonatomic, weak) MYZPasscodeInfoView * infoView;
 
 @property (nonatomic, weak) UIButton * fingerprintBtn;
 
@@ -26,6 +33,7 @@ NSInteger const NumberViewBaseTag = 77;
 
 @implementation MYZPasscodeView
 
+#pragma mark - lazy
 
 - (NSMutableArray *)selectNumberArray
 {
@@ -36,6 +44,8 @@ NSInteger const NumberViewBaseTag = 77;
     return _selectNumberArray;
 }
 
+
+#pragma mark - initializer
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -50,6 +60,11 @@ NSInteger const NumberViewBaseTag = 77;
 
 - (void)initSubviews
 {
+    //输入密码的数量指示视图
+    MYZPasscodeInfoView * infoView = [[MYZPasscodeInfoView alloc] init];
+    [self addSubview:infoView];
+    self.infoView = infoView;
+    
     //数字按钮
     for (int i=0; i<10; i++)
     {
@@ -65,15 +80,23 @@ NSInteger const NumberViewBaseTag = 77;
     [self addSubview:fingerprintBtn];
     self.fingerprintBtn = fingerprintBtn;
     
+    
     //删除按钮
     UIButton * deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
     [deleteBtn setTitleColor:NumberViewColor forState:UIControlStateNormal];
+    [deleteBtn setTitleColor:[UIColor colorWithWhite:0.702 alpha:1.000] forState:UIControlStateHighlighted];
+    [deleteBtn addTarget:self action:@selector(deleteBtnTouch) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:deleteBtn];
     self.deleteBtn = deleteBtn;
     
 }
 
+- (void)setHideFingerprintBtn:(BOOL)hideFingerprintBtn
+{
+    _hideFingerprintBtn = hideFingerprintBtn;
+    self.fingerprintBtn.hidden = hideFingerprintBtn;
+}
 
 - (void)layoutSubviews
 {
@@ -81,8 +104,9 @@ NSInteger const NumberViewBaseTag = 77;
     
     CGFloat superViewW = self.frame.size.width;
     
-    CGFloat marginTop = 0.0;
+    self.infoView.frame = CGRectMake(0, 0, superViewW, 20);
     
+    CGFloat marginTop = 10.0 + CGRectGetMaxY(self.infoView.frame);
     CGFloat marginRL = 40.0;
     CGFloat marginRow = 10.0;
     CGFloat marginColumn = 24.0;
@@ -129,6 +153,7 @@ NSInteger const NumberViewBaseTag = 77;
 }
 
 
+#pragma mark - touch event
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -146,6 +171,7 @@ NSInteger const NumberViewBaseTag = 77;
         }
     }
     
+    self.infoView.infoCount = self.selectNumberArray.count;
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -172,8 +198,35 @@ NSInteger const NumberViewBaseTag = 77;
             numberView.numberViewState = NumberViewStateNormal;
         }
     }
+    
+    
+    if (self.selectNumberArray.count == PasscodeCount)
+    {
+        NSMutableString * passcodeStr = [NSMutableString string];
+        for (MYZNumberView * numberView in self.selectNumberArray)
+        {
+            [passcodeStr appendString:[NSString stringWithFormat:@"%ld",numberView.tag - NumberViewBaseTag]];
+        }
+        
+        BOOL isRight = self.PasscodeResult(passcodeStr);
+        if (!isRight)
+        {
+            self.infoView.infoCount = 0;
+            [self.infoView.layer shake];
+        }
+        
+        [self.selectNumberArray removeAllObjects];
+    }
+    
 }
 
+
+//删除按钮
+- (void)deleteBtnTouch
+{
+    [self.selectNumberArray removeLastObject];
+    self.infoView.infoCount = self.selectNumberArray.count;
+}
 
 
 

@@ -69,7 +69,7 @@
         BOOL gestureLocked = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
         __weak typeof(self) weakSelf = self;
         
-        //如果手势密码是开的，点击switch跳转验证寿司页面删除手势
+        //如果手势密码是开的，点击switch跳转验证手势页面删除手势
         if (gestureLocked)
         {
             MYZMineGestureSetController * gestureSetVC = [[MYZMineGestureSetController alloc] init];

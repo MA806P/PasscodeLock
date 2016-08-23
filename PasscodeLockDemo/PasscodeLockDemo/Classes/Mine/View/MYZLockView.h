@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString * const GestureCodeKey;
-//显示手势轨迹
-FOUNDATION_EXPORT NSString * const GesturePathText;
+FOUNDATION_EXPORT NSString * const GesturePathText; //显示手势轨迹
+
+FOUNDATION_EXPORT NSString * const PasscodeKey;
 
 @interface MYZLockView : UIView
 

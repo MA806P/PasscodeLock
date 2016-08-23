@@ -8,7 +8,7 @@
 
 #import "MYZMinePasscodeController.h"
 #import "MYZSettingCell.h"
-#import "MYZNextViewController.h"
+#import "MYZMinePasscodeSetController.h"
 
 
 
@@ -75,8 +75,8 @@
     {
         __weak typeof(self) weakSelf = self;
         
-        MYZNextViewController * nvc = [[MYZNextViewController alloc] init];
-        nvc.locked = item.isSwitchOn;
+        MYZMinePasscodeSetController * nvc = [[MYZMinePasscodeSetController alloc] init];
+        nvc.passcodeType = item.isSwitchOn ? PasscodeSetTypeDelete : PasscodeSetTypeInstal;
         nvc.lockBlock = ^(BOOL locked){
         
             [[NSUserDefaults standardUserDefaults] setBool:locked forKey:PasscodeText];
@@ -95,7 +95,7 @@
             [weakSelf.tableView reloadData];
         };
         
-        [self presentViewController:nvc animated:YES completion:nil];
+        [self.navigationController pushViewController:nvc animated:YES];
     }
     else if ([item.labelText isEqualToString:TouchIDText])
     {

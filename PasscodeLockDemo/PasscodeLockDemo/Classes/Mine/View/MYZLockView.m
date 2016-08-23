@@ -80,12 +80,21 @@
     
     if (showPasscodeViewBool)
     {
+        NSString * savePasscode = [[NSUserDefaults standardUserDefaults] objectForKey:PasscodeKey];
+        __weak typeof(self) weakSelf = self;
+        
         MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] init];
+        passcodeView.PasscodeResult = ^(NSString * passcode){
+            
+            BOOL isRight = [passcode isEqualToString:savePasscode];
+            if (isRight) { [weakSelf closse]; }
+            return isRight; //savePasscode];
+        };
         [self addSubview:passcodeView];
         self.passcodeView = passcodeView;
         
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
-        [passcodeView addGestureRecognizer:tap];
+        //UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
+        //[passcodeView addGestureRecognizer:tap];
     }
     
 }
@@ -103,8 +112,8 @@
     //CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
     CGFloat lockViewW = 280;
-    CGFloat lockViewH = 280;
-    CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 40;
+    CGFloat lockViewH = 300;
+    CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 30;
     CGFloat lockViewX = ([UIScreen mainScreen].bounds.size.width - lockViewW) * 0.5;
     
     CGRect lockFrame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewH);

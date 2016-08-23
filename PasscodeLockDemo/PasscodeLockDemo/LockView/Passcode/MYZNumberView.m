@@ -30,11 +30,12 @@
     // Drawing code
     CGContextRef cr = UIGraphicsGetCurrentContext();
     
-    CGFloat numberDiameter = MIN(rect.size.width, rect.size.height) - 2.0;
-    CGRect numberRect = CGRectMake(1.0, 1.0, numberDiameter, numberDiameter);
+    CGFloat lineWidth = 1.0;
+    CGFloat numberDiameter = MIN(rect.size.width, rect.size.height) - lineWidth*2.0;
+    CGRect numberRect = CGRectMake(lineWidth, lineWidth, numberDiameter, numberDiameter);
     
     CGContextAddEllipseInRect(cr, numberRect);
-    CGContextSetLineWidth(cr, 1.0);
+    CGContextSetLineWidth(cr, lineWidth);
     [NumberViewColor set];
     self.numberViewState == NumberViewStateHighlight ? CGContextFillPath(cr) : CGContextStrokePath(cr);
     
@@ -45,8 +46,8 @@
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentCenter;
-    UIColor * textColor = [UIColor whiteColor];
-    [self.numberText drawInRect:textRect withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:30], NSForegroundColorAttributeName : textColor, NSParagraphStyleAttributeName : style}];
+    UIColor * textColor = NumberViewColor;
+    [self.numberText drawInRect:textRect withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:30 weight:UIFontWeightThin], NSForegroundColorAttributeName : textColor, NSParagraphStyleAttributeName : style}];
     
 }
 

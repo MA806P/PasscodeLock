@@ -10,7 +10,6 @@
 
 #define NumberViewColor [UIColor grayColor]
 
-
 typedef enum : NSUInteger {
     
     NumberViewStateNormal,
