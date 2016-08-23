@@ -104,12 +104,12 @@ NSInteger const NumberViewBaseTag = 77;
     
     CGFloat superViewW = self.frame.size.width;
     
-    self.infoView.frame = CGRectMake(0, 0, superViewW, 20);
+    self.infoView.frame = CGRectMake(0, 0, superViewW, 30);
     
-    CGFloat marginTop = 10.0 + CGRectGetMaxY(self.infoView.frame);
-    CGFloat marginRL = 40.0;
-    CGFloat marginRow = 10.0;
-    CGFloat marginColumn = 24.0;
+    CGFloat marginTop = 20.0 + CGRectGetMaxY(self.infoView.frame);
+    CGFloat marginRL = 10.0;
+    CGFloat marginRow = 15.0;
+    CGFloat marginColumn = 30.0;
     
     NSInteger rows = 4;
     NSInteger columns = 3;
