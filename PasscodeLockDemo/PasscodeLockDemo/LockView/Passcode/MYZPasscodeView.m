@@ -11,6 +11,8 @@
 #import "MYZPasscodeInfoView.h"
 #import "CALayer+shake.h"
 
+#import <LocalAuthentication/LocalAuthentication.h>
+
 /** 设置密码几位数 */
 NSInteger const PasscodeCount = 4;
 
@@ -74,11 +76,30 @@ NSInteger const NumberViewBaseTag = 77;
         [self addSubview:numberView];
     }
     
-    //指纹按钮
-    UIButton * fingerprintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    fingerprintBtn.backgroundColor = [UIColor brownColor];
-    [self addSubview:fingerprintBtn];
-    self.fingerprintBtn = fingerprintBtn;
+    
+    //判断是否支持指纹识别, 需要导入库
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0)
+    {
+        //本地验证对象上下文
+        LAContext *context = [LAContext new];
+        
+        //Evaluate: 评估  Policy: 策略,方针
+        //LAPolicyDeviceOwnerAuthenticationWithBiometrics: 允许设备拥有者使用生物识别技术
+        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil])
+        {
+            //指纹按钮
+            UIButton * fingerprintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            fingerprintBtn.contentMode = UIViewContentModeCenter;
+            [fingerprintBtn setImage:[UIImage imageNamed:@"fingerprint"] forState:UIControlStateNormal];
+            [fingerprintBtn addTarget:self action:@selector(showFingerprintTouch) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:fingerprintBtn];
+            self.fingerprintBtn = fingerprintBtn;
+        }
+    
+    }
+    
+    
+    
     
     
     //删除按钮
@@ -92,10 +113,18 @@ NSInteger const NumberViewBaseTag = 77;
     
 }
 
+
+
+
+
+
 - (void)setHideFingerprintBtn:(BOOL)hideFingerprintBtn
 {
     _hideFingerprintBtn = hideFingerprintBtn;
-    self.fingerprintBtn.hidden = hideFingerprintBtn;
+    if (self.fingerprintBtn)
+    {
+        self.fingerprintBtn.hidden = hideFingerprintBtn;
+    }
 }
 
 - (void)layoutSubviews
@@ -103,29 +132,29 @@ NSInteger const NumberViewBaseTag = 77;
     [super layoutSubviews];
     
     CGFloat superViewW = self.frame.size.width;
+    CGFloat superViewH = self.frame.size.height;
     
     self.infoView.frame = CGRectMake(0, 0, superViewW, 30);
     
     CGFloat marginTop = 20.0 + CGRectGetMaxY(self.infoView.frame);
-    CGFloat marginRL = 10.0;
     CGFloat marginRow = 15.0;
-    CGFloat marginColumn = 30.0;
+    CGFloat marginColumn = 24.0;
     
     NSInteger rows = 4;
     NSInteger columns = 3;
     
-    CGFloat numberWH = (superViewW - marginRL*2.0 - marginColumn*(columns-1))/columns;
-    
+    CGFloat numberW = (superViewW - marginColumn*(columns-1))/columns;
+    CGFloat numberH = (superViewH - marginTop - marginRow*(rows-1))/rows;
     
     for (int i = 1; i < columns * rows + 1; i++)
     {
         NSInteger currentRow = (i-1)/columns;
         NSInteger currentColumn = (i-1)%columns;
         
-        CGFloat numberX = marginRL + (marginColumn + numberWH) * currentColumn;
-        CGFloat numberY = marginTop + (marginRow + numberWH) * currentRow;
+        CGFloat numberX = (marginColumn + numberW) * currentColumn;
+        CGFloat numberY = marginTop + (marginRow + numberH) * currentRow;
         
-        CGRect subviewFrame = CGRectMake(numberX, numberY, numberWH, numberWH);
+        CGRect subviewFrame = CGRectMake(numberX, numberY, numberW, numberH);
         
         if (i == 10)
         {
@@ -138,7 +167,7 @@ NSInteger const NumberViewBaseTag = 77;
             numberView.frame = subviewFrame;
             continue;
         }
-        else if (i == 12)
+        else if (i == 12 && self.deleteBtn != nil)
         {
             self.deleteBtn.frame = subviewFrame;
             continue;
@@ -211,10 +240,10 @@ NSInteger const NumberViewBaseTag = 77;
         BOOL isRight = self.PasscodeResult(passcodeStr);
         if (!isRight)
         {
-            self.infoView.infoCount = 0;
             [self.infoView.layer shake];
         }
         
+        self.infoView.infoCount = 0;
         [self.selectNumberArray removeAllObjects];
     }
     
@@ -226,6 +255,38 @@ NSInteger const NumberViewBaseTag = 77;
 {
     [self.selectNumberArray removeLastObject];
     self.infoView.infoCount = self.selectNumberArray.count;
+}
+
+
+//指纹按钮
+- (void)showFingerprintTouch
+{
+    
+    LAContext *context = [LAContext new];
+    
+    //localizedReason: 指纹识别出现时的提示文字, 一般填写为什么使用指纹识别
+    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"指纹识别, 开锁" reply:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success)
+        {
+            //识别成功
+            dispatch_async(dispatch_get_main_queue(), ^{ self.PasscodeResult(@"fingerprint"); });
+        }
+        
+        if (error)
+        {
+            if (error.code == -2)
+            {
+                NSLog(@"用户取消了操作");
+            }
+            else
+            {
+                NSLog(@"错误: %@",error);
+            }
+            
+        }
+        
+    }];
 }
 
 

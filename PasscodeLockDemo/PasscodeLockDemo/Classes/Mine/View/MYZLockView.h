@@ -12,8 +12,12 @@ FOUNDATION_EXPORT NSString * const GestureCodeKey;
 FOUNDATION_EXPORT NSString * const GesturePathText; //显示手势轨迹
 
 FOUNDATION_EXPORT NSString * const PasscodeKey;
+FOUNDATION_EXPORT NSString * const TouchIDText;
+FOUNDATION_EXPORT NSString * const RemindTouchID;
 
 @interface MYZLockView : UIView
+
+- (void)showRemindFingerprint;
 
 @property (nonatomic, assign) BOOL showPasscodeViewBool;
 

@@ -56,7 +56,7 @@
         gestureView.gestureResult = ^(NSString * gestureCode){
             
             NSString * saveGestureCode = [[NSUserDefaults standardUserDefaults] objectForKey:GestureCodeKey];
-            NSLog(@" MYZLockView -- %@ == old %@", gestureCode, saveGestureCode);
+            //NSLog(@" MYZLockView -- %@ == old %@", gestureCode, saveGestureCode);
             if ([gestureCode isEqualToString:saveGestureCode])
             {
                 [weakSelf closse];
@@ -84,22 +84,30 @@
         __weak typeof(self) weakSelf = self;
         
         MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] init];
+        passcodeView.hideFingerprintBtn = ![[NSUserDefaults standardUserDefaults] boolForKey:TouchIDText];
         passcodeView.PasscodeResult = ^(NSString * passcode){
             
-            BOOL isRight = [passcode isEqualToString:savePasscode];
+            BOOL isRight = [passcode isEqualToString:savePasscode] || [passcode isEqualToString:@"fingerprint"];
             if (isRight) { [weakSelf closse]; }
-            return isRight; //savePasscode];
+            return isRight;
         };
         [self addSubview:passcodeView];
         self.passcodeView = passcodeView;
-        
-        //UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closse)];
-        //[passcodeView addGestureRecognizer:tap];
     }
     
 }
 
 
+
+- (void)showRemindFingerprint
+{
+    BOOL showTouchId = [[NSUserDefaults standardUserDefaults] boolForKey:TouchIDText];
+    BOOL remindTouch = [[NSUserDefaults standardUserDefaults] boolForKey:RemindTouchID];
+    if (self.showPasscodeViewBool && showTouchId && remindTouch && self.passcodeView )
+    {
+        [self.passcodeView showFingerprintTouch];
+    }
+}
 
 
 
@@ -108,23 +116,20 @@
 {
     [super layoutSubviews];
     
-    //CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    //CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
-    CGFloat lockViewW = 280;
-    CGFloat lockViewH = 300;
+    CGFloat lockViewW = (240/414.0)*screenW;;
     CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 30;
-    CGFloat lockViewX = ([UIScreen mainScreen].bounds.size.width - lockViewW) * 0.5;
-    
-    CGRect lockFrame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewH);
+    CGFloat lockViewX = (screenW - lockViewW) * 0.5;
     
     if (self.showGestureViewBool)
     {
-        self.gestureView.frame = lockFrame;
+        self.gestureView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, lockViewW);
     }
     else if (self.showPasscodeViewBool)
     {
-        self.passcodeView.frame = lockFrame;
+        self.passcodeView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, (380/736.0)*screenH);
     }
     
 }

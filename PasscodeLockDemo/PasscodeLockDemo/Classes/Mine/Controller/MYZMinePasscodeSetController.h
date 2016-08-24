@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString * const PasscodeKey;
+FOUNDATION_EXPORT NSString * const TouchIDText;
 
 typedef enum : NSUInteger {
     PasscodeSetTypeInstal = 1,

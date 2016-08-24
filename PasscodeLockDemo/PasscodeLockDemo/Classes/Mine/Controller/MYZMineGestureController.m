@@ -127,7 +127,6 @@
     else if([item.labelText isEqualToString:GesturePathText])
     {
         item.switchOn = !item.isSwitchOn;
-        NSLog(@" 显示手势轨迹 %d ",item.isSwitchOn);
         [[NSUserDefaults standardUserDefaults] setBool:item.isSwitchOn forKey:GesturePathText];
     }
     

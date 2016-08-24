@@ -13,6 +13,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, weak) MYZLockView * lockView;
+
 @end
 
 @implementation AppDelegate
@@ -28,12 +30,17 @@
     [self.window makeKeyAndVisible];
     
     [self addLockView];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText]) {
+        [self.lockView showRemindFingerprint];
+    }
     
     return YES;
 }
 
 - (void)addLockView
 {
+    [self.lockView removeFromSuperview];
+    
     //手势解锁开关
     BOOL gestureLock = [[NSUserDefaults standardUserDefaults] boolForKey:GestureText];
     //密码解锁开关
@@ -45,6 +52,7 @@
         lockView.showGestureViewBool = gestureLock;
         lockView.showPasscodeViewBool = passcodeLock;
         [[UIApplication sharedApplication].keyWindow addSubview:lockView];
+        self.lockView = lockView;
     }
 }
 
@@ -62,6 +70,10 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PasscodeText]) {
+        [self.lockView showRemindFingerprint];
+    }
 }
 
 

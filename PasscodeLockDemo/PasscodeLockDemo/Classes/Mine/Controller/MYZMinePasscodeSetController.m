@@ -57,11 +57,13 @@
     self.infoLabel = infoLabel;
     
     
-    CGFloat passcodeViewWH = 260;
-    CGFloat passcodeViewX = (screenW - passcodeViewWH) * 0.5;
+    CGFloat passcodeViewW = (240/414.0)*screenW;
+    CGFloat passcodeViewH = (380/736.0)*[UIScreen mainScreen].bounds.size.height;
+    CGFloat passcodeViewX = (screenW - passcodeViewW) * 0.5;
     CGFloat passcodeViewY = CGRectGetMaxY(self.infoLabel.frame) + 30;
     __weak typeof(self) weakSelf = self;
-    MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] initWithFrame:CGRectMake(passcodeViewX, passcodeViewY, passcodeViewWH, passcodeViewWH)];
+    MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] initWithFrame:CGRectMake(passcodeViewX, passcodeViewY, passcodeViewW, passcodeViewH)];
+    passcodeView.hideFingerprintBtn = ![[NSUserDefaults standardUserDefaults] boolForKey:TouchIDText];
     if (self.passcodeType == PasscodeSetTypeDelete)
     {
         passcodeView.hideFingerprintBtn = NO;
@@ -80,7 +82,7 @@
         else if (weakSelf.passcodeType == PasscodeSetTypeDelete)
         {
             NSString * savePasscode = [[NSUserDefaults standardUserDefaults] objectForKey:PasscodeKey];
-            if([savePasscode isEqualToString:passcode])
+            if([savePasscode isEqualToString:passcode] || [passcode isEqualToString:@"fingerprint"])
             {
                 [weakSelf backWithLocked:NO];
                 return YES;
@@ -92,16 +94,36 @@
         }
         else if (weakSelf.passcodeType == PasscodeSetTypeChange)
         {
-            NSString * savePasscode = [[NSUserDefaults standardUserDefaults] objectForKey:PasscodeKey];
-            if([savePasscode isEqualToString:passcode])
+            if (self.firstPasscode == nil)
             {
-                
-                return [weakSelf instalPasscodeWithPasscode:passcode];;
+                NSString * savePasscode = [[NSUserDefaults standardUserDefaults] objectForKey:PasscodeKey];
+                if([savePasscode isEqualToString:passcode])
+                {
+                    self.firstPasscode = passcode;
+                    self.infoLabel.text = @"输入新密码";
+                    return YES;
+                }
             }
             else
             {
-                return NO;
+                if([self.firstPasscode isEqualToString:passcode])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:passcode forKey:PasscodeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [self backWithLocked:YES];
+                    return YES;
+                }
+                else
+                {
+                    self.infoLabel.text = @"密码不匹配请重试";
+                    self.firstPasscode = nil;
+                    return NO;
+                }
             }
+            
+            
+            
         }
     
         return YES;
@@ -116,7 +138,7 @@
     if (self.firstPasscode == nil)
     {
         self.firstPasscode = passcode;
-        self.infoLabel.text = @"再次输入新密码";
+        self.infoLabel.text = self.passcodeType == PasscodeSetTypeChange ? @"输入新密码" : @"再次输入新密码";
         return YES;
     }
     else
@@ -142,7 +164,20 @@
 
 - (void)back
 {
-    [self backWithLocked:NO];
+    BOOL locked = NO;
+    if (self.passcodeType == PasscodeSetTypeInstal)
+    {
+        locked = NO;
+    }
+    else if (self.passcodeType == PasscodeSetTypeDelete)
+    {
+        locked = YES;
+    }
+    else if (self.passcodeType == PasscodeSetTypeChange)
+    {
+        locked = YES;
+    }
+    [self backWithLocked:locked];
 }
 
 - (void)backWithLocked:(BOOL)lock

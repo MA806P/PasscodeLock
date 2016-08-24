@@ -32,22 +32,40 @@
     
     CGFloat lineWidth = 1.0;
     CGFloat numberDiameter = MIN(rect.size.width, rect.size.height) - lineWidth*2.0;
-    CGRect numberRect = CGRectMake(lineWidth, lineWidth, numberDiameter, numberDiameter);
+    CGFloat numberX = (rect.size.width - numberDiameter) * 0.5;
+    CGFloat numberY = (rect.size.height - numberDiameter) * 0.5;
+    CGRect numberRect = CGRectMake(numberX, numberY, numberDiameter, numberDiameter);
     
     CGContextAddEllipseInRect(cr, numberRect);
     CGContextSetLineWidth(cr, lineWidth);
-    [NumberViewColor set];
-    self.numberViewState == NumberViewStateHighlight ? CGContextFillPath(cr) : CGContextStrokePath(cr);
     
-    CGFloat textWH = numberDiameter*0.8;
-    CGFloat textX = (rect.size.width - textWH) * 0.5;
-    CGFloat textY = (rect.size.height - textWH) * 0.5;
-    CGRect textRect = CGRectMake(textX, textY, textWH, textWH);
+    if (self.numberViewState == NumberViewStateHighlight)
+    {
+        [[UIColor colorWithWhite:0.800 alpha:1.000] set];
+        CGContextFillPath(cr);
+    }
+    else
+    {
+        [NumberViewColor set];
+        CGContextStrokePath(cr);
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentCenter;
     UIColor * textColor = NumberViewColor;
-    [self.numberText drawInRect:textRect withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:30 weight:UIFontWeightThin], NSForegroundColorAttributeName : textColor, NSParagraphStyleAttributeName : style}];
+    
+    NSDictionary * attributeDic = @{NSFontAttributeName : [UIFont systemFontOfSize:30 weight:UIFontWeightThin], NSForegroundColorAttributeName : textColor, NSParagraphStyleAttributeName : style};
+    
+    //计算数字居中
+    CGSize textSize = [self.numberText boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributeDic context:nil].size;
+    CGFloat textW = textSize.width;
+    CGFloat textH = textSize.height;
+    CGFloat textX = (rect.size.width - textW) * 0.5;
+    CGFloat textY = (rect.size.height - textH) * 0.5;
+    CGRect textRect = CGRectMake(textX, textY, textW, textH);
+    
+    [self.numberText drawInRect:textRect withAttributes:attributeDic];
     
 }
 

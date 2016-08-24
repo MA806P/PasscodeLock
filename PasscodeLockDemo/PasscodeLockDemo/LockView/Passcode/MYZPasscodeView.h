@@ -10,6 +10,8 @@
 
 @interface MYZPasscodeView : UIView
 
+- (void)showFingerprintTouch;
+
 @property (nonatomic, copy) BOOL(^PasscodeResult)(NSString * passcode);
 
 @property (nonatomic, getter=isHideFingerprintBtn) BOOL hideFingerprintBtn;

@@ -12,6 +12,8 @@ FOUNDATION_EXPORT NSString * const PasscodeText;
 FOUNDATION_EXPORT NSString * const TouchIDText;
 FOUNDATION_EXPORT NSString * const RemindTouchID;
 
+FOUNDATION_EXPORT NSString * const GestureText;
+
 
 @interface MYZMinePasscodeController : MYZMineBaseController
 

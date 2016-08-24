@@ -35,7 +35,7 @@
     
     
     CGFloat marginLR = 15.0;
-    CGFloat circleWH = 8.0;
+    CGFloat circleWH = (8.0/568.0)*[UIScreen mainScreen].bounds.size.height;
     CGFloat marginLeft = (w - circleWH * PasscodeCount * 1.0 - marginLR * (PasscodeCount - 1) * 1.0) * 0.5;
     CGFloat circleY = h > circleWH ? (h - circleWH) * 0.5 : 0.0;
     
