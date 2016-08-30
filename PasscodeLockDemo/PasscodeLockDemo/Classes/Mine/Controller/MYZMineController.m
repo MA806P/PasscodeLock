@@ -9,7 +9,22 @@
 #import "MYZMineController.h"
 #import "MYZMineLockTypeController.h"
 
-@interface MYZMineController ()
+#import <Photos/Photos.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+
+
+typedef enum {
+    kCLAuthorizationStatusNotDetermined = 0, // 用户尚未做出选择这个应用程序的问候
+    kCLAuthorizationStatusRestricted,        // 此应用程序没有被授权访问的照片数据。可能是家长控制权限
+    kCLAuthorizationStatusDenied,            // 用户已经明确否认了这一照片数据的应用程序访问
+    kCLAuthorizationStatusAuthorized         // 用户已经授权应用访问照片数据
+} CLAuthorizationStatus;
+
+
+@interface MYZMineController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, weak) UIImageView * headImgView;
 
 @end
 
@@ -26,7 +41,11 @@
     headImgView.image = [UIImage imageNamed:@"head"];
     headImgView.layer.cornerRadius = 30;
     headImgView.layer.masksToBounds = YES;
+    headImgView.userInteractionEnabled = YES;
     [headContentView addSubview:headImgView];
+    UITapGestureRecognizer * headTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewHeadImageTap)];
+    [headImgView addGestureRecognizer:headTap];
+    self.headImgView = headImgView;
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headImgView.frame)+10, 0, 100, 100)];
     label.text = @"MA806P";
     [headContentView addSubview:label];
@@ -47,7 +66,92 @@
     
 }
 
+- (void)tableViewHeadImageTap
+{
+    UIAlertController * selectImgAlert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            NSLog(@"不支持相机, 没有相机功能");
+            return;
+        }
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied)
+        {
+            NSLog(@"没有权限访问相机");
+            return;
+        }
+        
+        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+        pickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
+        pickerImage.delegate = self;
+        pickerImage.allowsEditing = YES;
+        [self presentViewController:pickerImage animated:YES completion:^{}];
+        
+    }]];
+    
+    
+    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"从相册中选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        {
+            NSLog(@"不支持相册, 没有相册功能");
+            return;
+        }
+        
+        
+        // 判断授权状态
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status != PHAuthorizationStatusAuthorized)
+            {
+                NSLog(@"没有权限访问照片");
+                return;
+            }
+            
+            UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            pickerImage.delegate = self;
+            pickerImage.allowsEditing = YES;
+            [self presentViewController:pickerImage animated:YES completion:nil];
+            
+        }];
+        
+        
+        //UIImagePickerControllerSourceTypePhotoLibrary,
+        //UIImagePickerControllerSourceTypeSavedPhotosAlbum
+        
+        
+//        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+//        {
+//            UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+//            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//            pickerImage.delegate = self;
+//            pickerImage.allowsEditing = YES;
+//            [self presentViewController:pickerImage animated:YES completion:nil];
+//        }
+    }]];
+    
+    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
+    
+    //selectImgAlert.view.tintColor = [UIColor redColor];
+    [self presentViewController:selectImgAlert animated:YES completion:nil];
+    
+}
 
+
+#pragma mark - Imagepicker delegte
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+        self.headImgView.image = image;
+    }];
+    
+}
 
 - (void)tableViewHeadViewTap
 {
