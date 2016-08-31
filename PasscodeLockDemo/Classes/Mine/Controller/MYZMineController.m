@@ -43,8 +43,6 @@ typedef enum {
     headImgView.layer.masksToBounds = YES;
     headImgView.userInteractionEnabled = YES;
     [headContentView addSubview:headImgView];
-    UITapGestureRecognizer * headTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewHeadImageTap)];
-    [headImgView addGestureRecognizer:headTap];
     self.headImgView = headImgView;
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headImgView.frame)+10, 0, 100, 100)];
     label.text = @"MA806P";
@@ -63,82 +61,6 @@ typedef enum {
     group.items = @[item];
     
     self.dataSources = @[group];
-    
-}
-
-- (void)tableViewHeadImageTap
-{
-    UIAlertController * selectImgAlert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            NSLog(@"不支持相机, 没有相机功能");
-            return;
-        }
-        
-        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied)
-        {
-            NSLog(@"没有权限访问相机");
-            return;
-        }
-        
-        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-        pickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
-        pickerImage.delegate = self;
-        pickerImage.allowsEditing = YES;
-        [self presentViewController:pickerImage animated:YES completion:^{}];
-        
-    }]];
-    
-    
-    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"从相册中选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-        {
-            NSLog(@"不支持相册, 没有相册功能");
-            return;
-        }
-        
-        
-        // 判断授权状态
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            if (status != PHAuthorizationStatusAuthorized)
-            {
-                NSLog(@"没有权限访问照片");
-                return;
-            }
-            
-            UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            pickerImage.delegate = self;
-            pickerImage.allowsEditing = YES;
-            [self presentViewController:pickerImage animated:YES completion:nil];
-            
-        }];
-        
-        
-        //UIImagePickerControllerSourceTypePhotoLibrary,
-        //UIImagePickerControllerSourceTypeSavedPhotosAlbum
-        
-        
-//        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-//        {
-//            UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-//            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//            pickerImage.delegate = self;
-//            pickerImage.allowsEditing = YES;
-//            [self presentViewController:pickerImage animated:YES completion:nil];
-//        }
-    }]];
-    
-    [selectImgAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){}]];
-    
-    //selectImgAlert.view.tintColor = [UIColor redColor];
-    [self presentViewController:selectImgAlert animated:YES completion:nil];
     
 }
 

@@ -119,7 +119,7 @@
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     
-    CGFloat lockViewW = (240/414.0)*screenW;;
+    CGFloat lockViewW = (300/414.0)*screenW;;
     CGFloat lockViewY = CGRectGetMaxY(self.headImgView.frame) + 30;
     CGFloat lockViewX = (screenW - lockViewW) * 0.5;
     
@@ -129,7 +129,7 @@
     }
     else if (self.showPasscodeViewBool)
     {
-        self.passcodeView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, (380/736.0)*screenH);
+        self.passcodeView.frame = CGRectMake(lockViewX, lockViewY, lockViewW, (430/736.0)*screenH);
     }
     
 }

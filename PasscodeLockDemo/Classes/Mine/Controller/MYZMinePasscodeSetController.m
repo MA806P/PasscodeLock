@@ -57,8 +57,8 @@
     self.infoLabel = infoLabel;
     
     
-    CGFloat passcodeViewW = (240/414.0)*screenW;
-    CGFloat passcodeViewH = (380/736.0)*[UIScreen mainScreen].bounds.size.height;
+    CGFloat passcodeViewW = (300/414.0)*screenW;
+    CGFloat passcodeViewH = (430/736.0)*[UIScreen mainScreen].bounds.size.height;
     CGFloat passcodeViewX = (screenW - passcodeViewW) * 0.5;
     CGFloat passcodeViewY = CGRectGetMaxY(self.infoLabel.frame) + 30;
     __weak typeof(self) weakSelf = self;

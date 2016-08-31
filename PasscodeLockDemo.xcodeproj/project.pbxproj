@@ -315,7 +315,6 @@
 				TargetAttributes = {
 					18D50A851D265D9C001AB2FB = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 3ZPEAN2426;
 					};
 				};
 			};
@@ -487,7 +486,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.159Cai.08181100;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myz.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -499,7 +498,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.159Cai.08181100;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myz.lock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
