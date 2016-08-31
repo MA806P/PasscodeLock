@@ -7,7 +7,6 @@
 //
 
 #import "MYZHomeController.h"
-#import "MYZNextViewController.h"
 
 static NSString * const CellId = @"CellId";
 static CGFloat alpha = 0;
@@ -90,11 +89,7 @@ static CGFloat alpha = 0;
     return [NSString stringWithFormat:@"section-%d", (int)section];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MYZNextViewController * vc = [[MYZNextViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

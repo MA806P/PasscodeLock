@@ -7,7 +7,6 @@
 //
 
 #import "MYZMineGestureController.h"
-#import "MYZNextViewController.h"
 #import "MYZSettingCell.h"
 #import "MYZMineGestureSetController.h"
 

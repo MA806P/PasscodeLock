@@ -203,7 +203,7 @@ CGFloat const LineWidth = 4.0f;
     NSMutableString * gestureCode = [NSMutableString string];
     for (MYZCircleView * circleView in self.selectCircleArray)
     {
-        [gestureCode appendFormat:@"%ld",circleView.tag - CircleViewBaseTag];
+        [gestureCode appendFormat:@"%ld",(long)(circleView.tag - CircleViewBaseTag)];
         //circleView.circleStatus = GestureViewStatusNormal;
     }
     

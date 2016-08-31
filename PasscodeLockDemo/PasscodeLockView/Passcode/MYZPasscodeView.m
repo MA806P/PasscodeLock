@@ -234,7 +234,8 @@ NSInteger const NumberViewBaseTag = 77;
         NSMutableString * passcodeStr = [NSMutableString string];
         for (MYZNumberView * numberView in self.selectNumberArray)
         {
-            [passcodeStr appendString:[NSString stringWithFormat:@"%ld",numberView.tag - NumberViewBaseTag]];
+            NSInteger codeInt = numberView.tag - NumberViewBaseTag;
+            [passcodeStr appendString:[NSString stringWithFormat:@"%ld",(long)codeInt]];
         }
         
         BOOL isRight = self.PasscodeResult(passcodeStr);
