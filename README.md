@@ -1,2 +1,4 @@
 # PasscodeLock
-application security
+ 密码解锁  手势解锁
+ 
+ 
