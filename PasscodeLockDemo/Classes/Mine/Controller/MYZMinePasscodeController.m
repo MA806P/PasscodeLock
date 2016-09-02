@@ -41,7 +41,7 @@
     {
         MYZSettingGroup * group1 = [[MYZSettingGroup alloc] init];
         
-         MYZSettingPushItem * item2 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改密码" andNextClass:[MYZMinePasscodeSetController class]];
+        MYZSettingPushItem * item2 = [MYZSettingPushItem settingPushItemWithIconName:nil andLabelText:@"修改密码" andNextClass:[MYZMinePasscodeSetController class]];
         
         MYZSettingSwitchItem * item3 = [MYZSettingSwitchItem settingItemWithIconName:nil andLabelText:TouchIDText];
         item3.switchOn = [[NSUserDefaults standardUserDefaults] boolForKey:TouchIDText];
@@ -94,7 +94,6 @@
                 [avc addAction:[UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
                     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:GestureText];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
                     
                     //跳转密码设置页面
                     [self pushToSetPasscodeWithItem:item];

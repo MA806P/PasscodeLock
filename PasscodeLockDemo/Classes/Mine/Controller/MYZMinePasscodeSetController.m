@@ -76,7 +76,31 @@
         
         if (weakSelf.passcodeType == PasscodeSetTypeInstal)
         {
-            return [weakSelf instalPasscodeWithPasscode:passcode];
+            if (weakSelf.firstPasscode == nil)
+            {
+                weakSelf.firstPasscode = passcode;
+                weakSelf.infoLabel.text = @"再次输入新密码";
+                return YES;
+            }
+            else
+            {
+                if([weakSelf.firstPasscode isEqualToString:passcode])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:passcode forKey:PasscodeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [weakSelf backWithLocked:YES];
+                    return YES;
+                }
+                else
+                {
+                    weakSelf.infoLabel.text = @"前后密码不匹配请重试";
+                    weakSelf.firstPasscode = nil;
+                    return NO;
+                }
+                
+            }
+            
             
         }
         else if (weakSelf.passcodeType == PasscodeSetTypeDelete)
@@ -94,34 +118,49 @@
         }
         else if (weakSelf.passcodeType == PasscodeSetTypeChange)
         {
-            if (self.firstPasscode == nil)
+            if (weakSelf.firstPasscode == nil)
             {
                 NSString * savePasscode = [[NSUserDefaults standardUserDefaults] objectForKey:PasscodeKey];
                 if([savePasscode isEqualToString:passcode])
                 {
-                    self.firstPasscode = passcode;
-                    self.infoLabel.text = @"输入新密码";
-                    return YES;
-                }
-            }
-            else
-            {
-                if([self.firstPasscode isEqualToString:passcode])
-                {
-                    [[NSUserDefaults standardUserDefaults] setObject:passcode forKey:PasscodeKey];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    
-                    [self backWithLocked:YES];
+                    weakSelf.firstPasscode = @"";
+                    weakSelf.infoLabel.text = @"输入新密码";
                     return YES;
                 }
                 else
                 {
-                    self.infoLabel.text = @"密码不匹配请重试";
-                    self.firstPasscode = nil;
+                    weakSelf.firstPasscode = nil;
+                    weakSelf.infoLabel.text = @"密码错误,请重新输入原密码";
                     return NO;
                 }
             }
-            
+            else
+            {
+                if ([weakSelf.firstPasscode isEqualToString:@""])
+                {
+                    weakSelf.firstPasscode = passcode;
+                    weakSelf.infoLabel.text = @"再次输入新密码";
+                    return YES;
+                }
+                else
+                {
+                    if([weakSelf.firstPasscode isEqualToString:passcode])
+                    {
+                        [[NSUserDefaults standardUserDefaults] setObject:passcode forKey:PasscodeKey];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        [weakSelf backWithLocked:YES];
+                        return YES;
+                    }
+                    else
+                    {
+                        weakSelf.infoLabel.text = @"前后密码不匹配请重试";
+                        weakSelf.firstPasscode = @"";
+                        return NO;
+                    }
+                    
+                }
+            }
             
             
         }
@@ -133,33 +172,6 @@
 }
 
 
-- (BOOL)instalPasscodeWithPasscode:(NSString *)passcode
-{
-    if (self.firstPasscode == nil)
-    {
-        self.firstPasscode = passcode;
-        self.infoLabel.text = self.passcodeType == PasscodeSetTypeChange ? @"输入新密码" : @"再次输入新密码";
-        return YES;
-    }
-    else
-    {
-        if([self.firstPasscode isEqualToString:passcode])
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:passcode forKey:PasscodeKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self backWithLocked:YES];
-            return YES;
-        }
-        else
-        {
-            self.infoLabel.text = @"密码不匹配请重试";
-            self.firstPasscode = nil;
-            return NO;
-        }
-        
-    }
-}
 
 
 - (void)back
