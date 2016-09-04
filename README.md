@@ -3,6 +3,7 @@
  
  #1.手势解锁
  
+![demo](https://github.com/MA806P/PasscodeLock/blob/master/ScreenShoot/Gesture.gif)
  
  使用方法
  
