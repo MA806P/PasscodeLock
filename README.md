@@ -19,6 +19,14 @@
  
  ![demo](https://github.com/MA806P/PasscodeLock/blob/master/ScreenShoot/Passcode.gif)
  
+ 使用方法
+ ```
+ MYZPasscodeView * passcodeView = [[MYZPasscodeView alloc] init];
+ passcodeView.PasscodeResult = ^(NSString * passcode){
+    //得到数字密码passcode
+ };
+ ```
+ 
 ## 3.指纹解锁
  
  
