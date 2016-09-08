@@ -271,7 +271,10 @@ NSInteger const NumberViewBaseTag = 77;
         if (success)
         {
             //识别成功
-            dispatch_async(dispatch_get_main_queue(), ^{ self.PasscodeResult(@"fingerprint"); });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.PasscodeResult(@"fingerprint");
+                self.infoView.infoCount = PasscodeCount;
+            });
         }
         
         if (error)
