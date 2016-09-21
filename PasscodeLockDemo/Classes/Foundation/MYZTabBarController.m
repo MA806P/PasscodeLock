@@ -26,7 +26,7 @@
     
     MYZMineController * mineVc = [[MYZMineController alloc] init];
     [self addChildController:mineVc title:@"我的" imageName:@"tab_2"];
-    self.selectedIndex = 1;
+    //self.selectedIndex = 1;
     
     
 }

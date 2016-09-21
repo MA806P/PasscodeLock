@@ -14,12 +14,12 @@
 #import <AVFoundation/AVMediaFormat.h>
 
 
-typedef enum {
-    kCLAuthorizationStatusNotDetermined = 0, // 用户尚未做出选择这个应用程序的问候
-    kCLAuthorizationStatusRestricted,        // 此应用程序没有被授权访问的照片数据。可能是家长控制权限
-    kCLAuthorizationStatusDenied,            // 用户已经明确否认了这一照片数据的应用程序访问
-    kCLAuthorizationStatusAuthorized         // 用户已经授权应用访问照片数据
-} CLAuthorizationStatus;
+//typedef enum {
+//    kCLAuthorizationStatusNotDetermined = 0, // 用户尚未做出选择这个应用程序的问候
+//    kCLAuthorizationStatusRestricted,        // 此应用程序没有被授权访问的照片数据。可能是家长控制权限
+//    kCLAuthorizationStatusDenied,            // 用户已经明确否认了这一照片数据的应用程序访问
+//    kCLAuthorizationStatusAuthorized         // 用户已经授权应用访问照片数据
+//} CLAuthorizationStatus;
 
 
 @interface MYZMineController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>

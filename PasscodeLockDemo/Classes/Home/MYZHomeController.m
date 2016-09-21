@@ -10,10 +10,15 @@
 
 static NSString * const CellId = @"CellId";
 static CGFloat alpha = 0;
+static CGFloat const headerH = 250.0;
+static CGFloat const AngleScale = 2.0 * M_PI / 180.0;
 
 @interface MYZHomeController ()
 
 @property (nonatomic, assign) BOOL isChangeStatusBar;
+
+@property (nonatomic, weak) UIView * header;
+@property (nonatomic, weak) UIImageView * indicatorImgView;
 
 @end
 
@@ -43,9 +48,27 @@ static CGFloat alpha = 0;
     
     
     //设置tableView的头部视图
-    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0, 250)];
+    UIView * tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, headerH)];
+    tableHeaderView.backgroundColor = [UIColor clearColor];
+    self.tableView.tableHeaderView = tableHeaderView;
+    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, headerH)];
     imageView.image = [UIImage imageNamed:@"11"];
-    self.tableView.tableHeaderView = imageView;
+    [self.tableView addSubview:imageView];
+    self.header = imageView;
+    
+    
+    
+//    UIActivityIndicatorView * indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//    indicator.frame = CGRectMake(10, 20, 10, 10);
+//    [indicator startAnimating];
+//    [self.tableView addSubview:indicator];
+    
+    
+    UIImageView * indicatorImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"indicator"]];
+    indicatorImgView.frame = CGRectMake(10, 20, 15, 15);
+    indicatorImgView.hidden = YES;
+    [[UIApplication sharedApplication].keyWindow addSubview:indicatorImgView];
+    self.indicatorImgView = indicatorImgView;
     
     
     /*
@@ -90,12 +113,41 @@ static CGFloat alpha = 0;
 }
 
 
+#pragma mark - UIScrollView delegate
 
+BOOL StartedLoading;
+CGFloat CurrentOffsetY = 0;
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    StartedLoading = NO;
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    alpha =  scrollView.contentOffset.y/200.0;
+    CGFloat offsetY = scrollView.contentOffset.y;
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
     
+    if (offsetY < 0)
+    {
+        CGFloat headerW = screenW - offsetY;
+        CGFloat headerX = (screenW - headerW) * 0.5;
+        self.header.frame = CGRectMake(headerX, offsetY, headerW, headerH-offsetY);
+        
+        self.indicatorImgView.hidden = NO;
+        self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, (offsetY-CurrentOffsetY)*AngleScale);
+        CurrentOffsetY = offsetY;
+        
+    }
+    else if (offsetY >= 0)
+    {
+        self.header.frame = CGRectMake(0, 0, screenW, headerH);
+        if (StartedLoading == NO) { self.indicatorImgView.hidden = YES; }
+    }
+    //NSLog(@"---- %.2lf  %@  %@", offsetY, NSStringFromCGRect(self.header.frame), NSStringFromCGRect(self.tableView.tableHeaderView.frame));
+    
+    {
+    alpha =  offsetY/headerH;
     alpha = (alpha <= 0)?0:alpha;
     alpha = (alpha >= 1)?1:alpha;
     
@@ -119,7 +171,6 @@ static CGFloat alpha = 0;
     {
         [self setNeedsStatusBarAppearanceUpdate];
     }
-
     
     //设置导航条上的标签是否跟着透明
     //self.navigationItem.leftBarButtonItem.customView.alpha = alpha;
@@ -128,9 +179,67 @@ static CGFloat alpha = 0;
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[titleColor colorWithAlphaComponent:alpha]};
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:alpha];
-    
-    
+    }
 }
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    CGFloat offsetY = scrollView.contentOffset.y;
+    NSLog(@"-- r = %.2lf", -offsetY);
+    if (-offsetY > 180)
+    {
+        StartedLoading = YES;
+        [UIView animateWithDuration:3.0 animations:^{
+            //self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, -M_PI*5.0);
+            self.indicatorImgView.transform = CGAffineTransformMakeRotation(-M_PI);
+        } completion:^(BOOL finished) {
+            self.indicatorImgView.hidden = YES;
+        }];
+    }
+}
+
+
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    BeginTouchY = [[touches anyObject] locationInView:self.view].y;
+//    CurrentTouchY = BeginTouchY;
+//}
+//
+//- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    CGFloat moveTouchY = [[touches anyObject] locationInView:self.view].y;
+//    
+//    NSLog(@"---- contentOffsetY=%.2lf, currentY=%.2lf, moveY=%.2lf", self.tableView.contentOffset.y, CurrentTouchY, moveTouchY);
+//    
+//    if (self.tableView.contentOffset.y < 0)
+//    {
+//        self.indicatorImgView.hidden = NO;
+//        self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, (moveTouchY-CurrentTouchY)*M_PI/180.0);
+//    }
+//    else
+//    {
+//        self.indicatorImgView.hidden = YES;
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
