@@ -13,12 +13,15 @@ static CGFloat alpha = 0;
 static CGFloat const headerH = 250.0;
 static CGFloat const AngleScale = 2.0 * M_PI / 180.0;
 
+static NSString * const IndicatorAnimationKey = @"IndicatorAnimationKey";
+
 @interface MYZHomeController ()
 
 @property (nonatomic, assign) BOOL isChangeStatusBar;
 
 @property (nonatomic, weak) UIView * header;
 @property (nonatomic, weak) UIImageView * indicatorImgView;
+@property (nonatomic, strong) CABasicAnimation * rotateAnimation;
 
 @end
 
@@ -65,11 +68,17 @@ static CGFloat const AngleScale = 2.0 * M_PI / 180.0;
     
     
     UIImageView * indicatorImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"indicator"]];
-    indicatorImgView.frame = CGRectMake(10, 20, 15, 15);
+    indicatorImgView.frame = CGRectMake(20, 30, 25, 25);
     indicatorImgView.hidden = YES;
     [[UIApplication sharedApplication].keyWindow addSubview:indicatorImgView];
     self.indicatorImgView = indicatorImgView;
     
+    self.rotateAnimation = [[CABasicAnimation alloc] init];
+    self.rotateAnimation.keyPath = @"transform.rotation.z";
+    self.rotateAnimation.fromValue = @0;
+    self.rotateAnimation.toValue = @(M_PI * 2);
+    self.rotateAnimation.duration = 0.5;
+    self.rotateAnimation.repeatCount = MAXFLOAT;
     
     /*
     //设置导航条上的标签是否跟着透明
@@ -134,8 +143,11 @@ CGFloat CurrentOffsetY = 0;
         CGFloat headerX = (screenW - headerW) * 0.5;
         self.header.frame = CGRectMake(headerX, offsetY, headerW, headerH-offsetY);
         
-        self.indicatorImgView.hidden = NO;
-        self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, (offsetY-CurrentOffsetY)*AngleScale);
+        if (StartedLoading == NO)
+        {
+            self.indicatorImgView.hidden = NO;
+            self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, (offsetY-CurrentOffsetY)*AngleScale);
+        }
         CurrentOffsetY = offsetY;
         
     }
@@ -185,45 +197,37 @@ CGFloat CurrentOffsetY = 0;
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"-- r = %.2lf", -offsetY);
-    if (-offsetY > 180)
+    //NSLog(@"-- r = %.2lf", -offsetY);
+    if (-offsetY > 60 && StartedLoading == NO)
     {
         StartedLoading = YES;
-        [UIView animateWithDuration:3.0 animations:^{
-            //self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, -M_PI*5.0);
-            self.indicatorImgView.transform = CGAffineTransformMakeRotation(-M_PI);
-        } completion:^(BOOL finished) {
-            self.indicatorImgView.hidden = YES;
-        }];
+        [self.indicatorImgView.layer addAnimation:self.rotateAnimation forKey:IndicatorAnimationKey];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self headIndicatorEndRefreshing];
+            
+        });
     }
 }
 
 
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    BeginTouchY = [[touches anyObject] locationInView:self.view].y;
-//    CurrentTouchY = BeginTouchY;
-//}
-//
-//- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    CGFloat moveTouchY = [[touches anyObject] locationInView:self.view].y;
-//    
-//    NSLog(@"---- contentOffsetY=%.2lf, currentY=%.2lf, moveY=%.2lf", self.tableView.contentOffset.y, CurrentTouchY, moveTouchY);
-//    
-//    if (self.tableView.contentOffset.y < 0)
-//    {
-//        self.indicatorImgView.hidden = NO;
-//        self.indicatorImgView.transform = CGAffineTransformRotate(self.indicatorImgView.transform, (moveTouchY-CurrentTouchY)*M_PI/180.0);
-//    }
-//    else
-//    {
-//        self.indicatorImgView.hidden = YES;
-//    }
-//}
 
-
+//停止加载转圈的动画, 并隐藏
+- (void)headIndicatorEndRefreshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        StartedLoading = NO;
+        [self.indicatorImgView.layer removeAnimationForKey:IndicatorAnimationKey];
+        self.indicatorImgView.transform = CGAffineTransformIdentity;
+        self.indicatorImgView.hidden = YES;
+        
+    });
+    
+    
+}
 
 
 
