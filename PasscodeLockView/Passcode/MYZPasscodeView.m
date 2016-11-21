@@ -263,43 +263,45 @@ NSInteger const NumberViewBaseTag = 77;
 - (void)showFingerprintTouch
 {
     
-    LAContext * context = [[LAContext alloc] init];
-    NSError * error;
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error])
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0)
     {
-                    
-        //localizedReason: 指纹识别出现时的提示文字, 一般填写为什么使用指纹识别
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"指纹解锁" reply:^(BOOL success, NSError * _Nullable error) {
-            
-            if (success)
-            {
-                //识别成功
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.PasscodeResult(@"fingerprint");
-                    self.infoView.infoCount = PasscodeCount;
-                });
-            }
-            else if (error)
-            {
-                NSLog(@"LAPolicyDeviceOwnerAuthenticationWithBiometrics -- %@",error);
-            }
-            
-        }];
         
+        LAContext * context = [[LAContext alloc] init];
+        context.localizedCancelTitle = @"取消";
+        context.localizedFallbackTitle = @"输入密码";
+        NSError * error;
+        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error])
+        {
+            
+            //localizedReason: 指纹识别出现时的提示文字, 一般填写为什么使用指纹识别
+            [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"指纹解锁" reply:^(BOOL success, NSError * _Nullable error) {
+                
+                if (success)
+                {
+                    //识别成功
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.PasscodeResult(@"fingerprint");
+                        self.infoView.infoCount = PasscodeCount;
+                    });
+                }
+                else if (error)
+                {
+                    NSLog(@"LAPolicyDeviceOwnerAuthenticationWithBiometrics -- %@",error);
+                }
+                
+            }];
+            
+        }
+        else if([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:nil])
+        {
+            [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"密码解锁" reply:^(BOOL success, NSError * _Nullable error){
+                
+                NSLog(@"LAPolicyDeviceOwnerAuthentication -- %@", error);
+                
+            }];
+        }
+        NSLog(@" --- %@ ", error);
     }
-//    else if([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:nil])
-//    {
-//        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:@"密码解锁" reply:^(BOOL success, NSError * _Nullable error){
-//            
-//            NSLog(@"LAPolicyDeviceOwnerAuthentication -- %@", error);
-//            
-//        }];
-//    }
-    
-    NSLog(@" --- %@ ", error);
-    
-    //http://www.jianshu.com/p/4446c082d771
-    //http://www.jianshu.com/p/a07b6d9ab19e
     
     
     //Error Domain=com.apple.LocalAuthentication Code=-7 "No fingers are enrolled with Touch ID." UserInfo={NSLocalizedDescription=No fingers are enrolled with Touch ID.} //系统没有设置指纹
