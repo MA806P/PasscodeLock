@@ -32,7 +32,7 @@
  
  
 ## 3.指纹解锁
- 
+ ![demo](https://github.com/MA806P/PasscodeLock/blob/master/ScreenShoot/Fingerprint.jpg)
 
 ```
 #import <LocalAuthentication/LocalAuthentication.h>
