@@ -51,7 +51,9 @@ if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0)
 
             if (success) {
                 //识别成功
-                dispatch_async(dispatch_get_main_queue(), ^{ //... });
+                dispatch_async(dispatch_get_main_queue(), ^{ 
+                    //...
+                });
             }
 
             if (error) { }
